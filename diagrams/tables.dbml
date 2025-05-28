@@ -1,0 +1,59 @@
+table user{
+  id bigint [primary key]
+  username varchar(60) [unique]
+  nickname varchar(60)
+  password varchar(500)
+  url_image varchar(800)
+}
+
+table roles{
+  id bigint [primary key]
+  name varchar(40) [unique]
+}
+
+table user_role{
+  id_user bigint [unique]
+  id_role bigint [unique]
+}
+
+table album{
+  id bigint [primary key]
+  title varchar(60)
+  url_image varchar(800)
+}
+table category{
+  id bigint [primary key]
+  title varchar(60)
+  url_image varchar(800)
+}
+table cancion{
+  id bigint [primary key]
+  title varchar(60)
+  url_image varchar(800)
+  url_audio varchar(800)
+  id_album bigint
+}
+table artista{
+  id bigint [primary key]
+  name varchar(60)
+  url_image varchar(800)
+}
+
+table artista_album{
+  id_artista bigint
+  id_album bigint
+}
+
+table category_album{
+  id_category bigint
+  id_album bigint
+}
+
+
+Ref: artista_album.id_album > album.id
+Ref: artista_album.id_artista > artista.id
+Ref: category_album.id_category> category.id
+Ref: category_album.id_album > album.id
+Ref: cancion.id_album > album.id
+Ref: user_role.id_role < roles.id
+Ref: user_role.id_user < user.id
