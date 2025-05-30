@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
+import java.util.prefs.BackingStoreException;
 
 @Repository
 public class FireBaseRepository {
@@ -24,10 +25,11 @@ public class FireBaseRepository {
         return StorageClient.getInstance().bucket().getStorage();
     }
 
-    public FileDto saveImage(MultipartFile imagefile, boolean isaudio){
-        String imageName = UUID.randomUUID()+imagefile.getOriginalFilename();
-        String filename = (isaudio?audiofolder:imagefolder) + viewlenght(imageName);
-        System.out.println(filename+"\n\n");
+    public FileDto saveFile(MultipartFile imagefile, boolean isaudio) throws BackingStoreException {
+        if(imagefile == null || imagefile.getOriginalFilename() == null) throw new BackingStoreException("Agregue un archivo");
+
+        String imageName = UUID.randomUUID()+ viewlenght(imagefile.getOriginalFilename());
+        String filename = (isaudio?audiofolder:imagefolder) + imageName;
         Storage storage = getStorage();
         BlobId blobId = BlobId.of(bucketname, filename);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
@@ -46,7 +48,7 @@ public class FireBaseRepository {
         }
     }
 
-    public void deleteImage(String idname, boolean isaudio){
+    public void deleteFile(String idname, boolean isaudio){
         String filename = (isaudio?audiofolder:imagefolder)+ idname;
         Storage storage = getStorage();
 
