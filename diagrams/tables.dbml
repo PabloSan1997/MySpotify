@@ -4,6 +4,7 @@ table user{
   nickname varchar(60)
   password varchar(500)
   url_image varchar(800)
+  imagefilename varchar(200) [unique]
 }
 
 table roles{
@@ -20,11 +21,13 @@ table album{
   id bigint [primary key]
   title varchar(60)
   url_image varchar(800)
+  imagefilename varchar(200) [unique]
 }
 table category{
   id bigint [primary key]
   title varchar(60)
   url_image varchar(800)
+  imagefilename varchar(200) [unique]
 }
 table cancion{
   id bigint [primary key]
@@ -32,11 +35,14 @@ table cancion{
   url_image varchar(800)
   url_audio varchar(800)
   id_album bigint
+  imagefilename varchar(200) [unique]
+  audiofilename varchar(200) [unique]
 }
 table artista{
   id bigint [primary key]
   name varchar(60)
   url_image varchar(800)
+  imagefilename varchar(200) [unique]
 }
 
 table artista_album{
@@ -50,10 +56,10 @@ table category_album{
 }
 
 
-Ref: artista_album.id_album > album.id
-Ref: artista_album.id_artista > artista.id
-Ref: category_album.id_category> category.id
-Ref: category_album.id_album > album.id
-Ref: cancion.id_album > album.id
+Ref: artista_album.id_album < album.id
+Ref: artista_album.id_artista < artista.id
+Ref: category_album.id_category < category.id
+Ref: category_album.id_album < album.id
+Ref: cancion.id_album < album.id
 Ref: user_role.id_role < roles.id
 Ref: user_role.id_user < user.id
