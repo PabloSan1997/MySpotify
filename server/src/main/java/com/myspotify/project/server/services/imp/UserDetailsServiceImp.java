@@ -29,7 +29,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
         userSecurity.setUsername(username);
         userSecurity.setAuthorities(authorities);
-        userSecurity.setEnabled(true);
+        userSecurity.setEnabled(users.getEnabled());
         userSecurity.setPassword(users.getPassword());
         userSecurity.setNickname(users.getNickname());
 

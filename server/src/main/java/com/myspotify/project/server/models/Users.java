@@ -30,6 +30,8 @@ public class Users {
     private String password;
     @Column(length = 200, unique = true)
     private String imagefilename;
+    private Boolean enabled;
+
     @ManyToMany
     @JoinTable(
             name = "user_role",
@@ -38,4 +40,9 @@ public class Users {
     )
     @JsonIgnore
     private List<Roles> roles;
+
+    @PrePersist
+    public void prepersist(){
+        enabled = true;
+    }
 }

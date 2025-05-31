@@ -5,6 +5,7 @@ table user{
   password varchar(500)
   url_image varchar(800)
   imagefilename varchar(200) [unique]
+  enabled boolean
 }
 
 table roles{
