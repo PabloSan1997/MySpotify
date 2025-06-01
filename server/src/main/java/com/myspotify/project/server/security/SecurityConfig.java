@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,27 +37,48 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, JwtService jwtService) throws Exception{
         http.csrf(c->c.disable())
-                .authorizeHttpRequests(a -> a
-                        .requestMatchers(
-                                HttpMethod.GET,
-                                "/api/user/viewadmin",
-                                "/api/user/viewuserinfo"
-                        ).hasRole("USER")
-                        .requestMatchers(
-                                HttpMethod.POST,
-                                "/api/user/addimageprefile"
-                        ).hasRole("USER")
-                        .requestMatchers(
-                            HttpMethod.POST,
-                                "/api/user/login",
-                                "/api/user/register"
-                        ).permitAll()
-                        .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests(getMatcherRegistryCustomizer())
                 .addFilter(new JwtValidationFilter(authenticationManager(), jwtService))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
+    }
+
+    private static Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> getMatcherRegistryCustomizer() {
+        return a -> a
+                .requestMatchers(
+                        HttpMethod.GET,
+                        "/api/user/viewadmin",
+                        "/api/user/viewuserinfo",
+                        "/api/category",
+                        "/api/category/**",
+                        "/api/artist",
+                        "/api/artist/**",
+                        "/api/album",
+                        "/api/album/**"
+                ).hasRole("USER")
+                .requestMatchers(
+                        HttpMethod.POST,
+                        "/api/user/addimageprefile"
+                ).hasRole("USER")
+                .requestMatchers(
+                        HttpMethod.POST,
+                        "/api/category",
+                        "/api/artist"
+                ).hasRole("ADMIN")
+                .requestMatchers(
+                        HttpMethod.DELETE,
+                        "/api/category/{id}",
+                        "/api/artist/{id}",
+                        "/api/album/{id}",
+                        "/api/album/song/{{idalbum}}"
+                ).hasRole("ADMIN")
+                .requestMatchers(
+                        HttpMethod.POST,
+                        "/api/user/login",
+                        "/api/user/register"
+                ).permitAll()
+                .anyRequest().authenticated();
     }
 
 

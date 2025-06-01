@@ -1,5 +1,6 @@
 package com.myspotify.project.server.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +24,12 @@ public class Songs {
     @Column(name = "url_audio", length = 800)
     private String urlAudio;
     @Column(length = 200, unique = true)
+    @JsonIgnore
     private String imagefilename;
     @Column(length = 200, unique = true)
+    @JsonIgnore
     private String audiofilename;
+
+    @ManyToOne
+    private Album album;
 }

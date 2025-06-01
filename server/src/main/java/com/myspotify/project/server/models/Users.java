@@ -29,6 +29,7 @@ public class Users {
     @Column(length = 500, nullable = false)
     private String password;
     @Column(length = 200, unique = true)
+    @JsonIgnore
     private String imagefilename;
     private Boolean enabled;
 
@@ -36,7 +37,8 @@ public class Users {
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_role")
+            inverseJoinColumns = @JoinColumn(name = "id_role"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"id_user", "id_role"})}
     )
     @JsonIgnore
     private List<Roles> roles;

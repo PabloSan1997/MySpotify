@@ -1,10 +1,13 @@
 package com.myspotify.project.server.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,5 +24,16 @@ public class Artist {
     @Column(length = 800, name = "url_image")
     private String urlImage;
     @Column(length = 200)
+    @JsonIgnore
     private String imagefilename;
+
+    @ManyToMany
+    @JoinTable(
+            name = "artista_album",
+            joinColumns = @JoinColumn(name = "id_artista"),
+            inverseJoinColumns = @JoinColumn(name = "id_album"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"id_artista", "id_album"})}
+    )
+    @JsonIgnore
+    private List<Album> albums;
 }
