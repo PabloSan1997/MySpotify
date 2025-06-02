@@ -65,6 +65,21 @@ public class AppServiceImp implements CategoryService, ArtistService, AlbumSongs
     }
 
     @Override
+    public Category updateCategoryImageName(Long id, MainInfoDto categoryDto) {
+        try{
+            Category category = findCategoryById(id);
+            fireBaseRepository.deleteFile(category.getImagefilename(), false);
+            var filedto = fireBaseRepository.saveFile(categoryDto.getFileimage(), false);
+            category.setUrlImage(filedto.getUrlfile());
+            category.setImagefilename(filedto.getIdfirebase());
+            category.setTitle(categoryDto.getTitle());
+            return categoryRepository.save(category);
+        }catch (Exception e){
+            throw new MyFireBaseException(e.getMessage());
+        }
+    }
+
+    @Override
     @Transactional
     public Category findCategoryById(Long id) {
         return categoryRepository.findById(id).orElseThrow(()-> new MyBadRequestException("Id invalido"));
@@ -111,6 +126,22 @@ public class AppServiceImp implements CategoryService, ArtistService, AlbumSongs
            Artist artist = Artist.builder().name(mainInfoDto.getTitle())
                    .imagefilename(fileDto.getIdfirebase())
                    .urlImage(fileDto.getUrlfile()).build();
+           return artistRepository.save(artist);
+       }catch (Exception e){
+           throw new MyFireBaseException(e.getMessage());
+       }
+    }
+
+    @Override
+    @Transactional
+    public Artist updateArtistImageName(Long id, MainInfoDto mainInfoDto) {
+       try{
+           Artist artist = findArtistById(id);
+           fireBaseRepository.deleteFile(artist.getImagefilename(), false);
+           var filedto = fireBaseRepository.saveFile(mainInfoDto.getFileimage(), false);
+           artist.setName(mainInfoDto.getTitle());
+           artist.setImagefilename(filedto.getIdfirebase());
+           artist.setUrlImage(filedto.getUrlfile());
            return artistRepository.save(artist);
        }catch (Exception e){
            throw new MyFireBaseException(e.getMessage());

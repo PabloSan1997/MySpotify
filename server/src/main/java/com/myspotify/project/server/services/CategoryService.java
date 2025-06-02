@@ -11,6 +11,7 @@ public interface CategoryService {
     List<Category> findAllByIdAlbum(Long idAlbum, Pageable pageable);
     List<Category> findAllByIdArtist(Long idArtist, Pageable pageable);
     Category saveCategory(MainInfoDto categoryDto);
+    Category updateCategoryImageName(Long id, MainInfoDto categoryDto);
     Category findCategoryById(Long id);
     void deleteCategoryById(Long id);
 }

@@ -12,5 +12,6 @@ public interface ArtistService {
     List<Artist> findArtistByIdCategory(Long idCategory, Pageable pageable);
     Artist findArtistById(Long id);
     Artist saveArtist(MainInfoDto mainInfoDto);
+    Artist updateArtistImageName(Long id, MainInfoDto mainInfoDto);
     void deleteArtistById(Long id);
 }
