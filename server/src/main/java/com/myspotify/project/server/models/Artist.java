@@ -27,13 +27,7 @@ public class Artist {
     @JsonIgnore
     private String imagefilename;
 
-    @ManyToMany
-    @JoinTable(
-            name = "artista_album",
-            joinColumns = @JoinColumn(name = "id_artista"),
-            inverseJoinColumns = @JoinColumn(name = "id_album"),
-            uniqueConstraints = {@UniqueConstraint(columnNames = {"id_artista", "id_album"})}
-    )
+    @ManyToMany(mappedBy = "artists")
     @JsonIgnore
     private List<Album> albums;
 }

@@ -27,12 +27,7 @@ public class Category {
     @JsonIgnore
     private String imagefilename;
 
-    @ManyToMany
-    @JoinTable(
-            name = "category_album",
-            joinColumns = @JoinColumn(name = "id_category"),
-            inverseJoinColumns = @JoinColumn(name = "id_album"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"id_category", "id_album"})
-    )
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
     private List<Album> albums;
 }

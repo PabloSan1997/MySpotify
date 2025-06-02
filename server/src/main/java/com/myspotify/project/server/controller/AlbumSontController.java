@@ -23,7 +23,12 @@ public class AlbumSontController {
         return ResponseEntity.ok(albumSongsService.findAllAlbums(pageable));
     }
 
-    @GetMapping("/songs/{idalbum}")
+    @GetMapping("/song/onesong/{id}")
+    public ResponseEntity<?> findSongById(@PathVariable Long id) {
+        return ResponseEntity.ok(albumSongsService.findSongById(id));
+    }
+
+    @GetMapping("/song/{idalbum}")
     public ResponseEntity<?> findSongs(@PathVariable("idalbum") Long idAlbum, Pageable pageable) {
         return ResponseEntity.ok(albumSongsService.findByIdAlbum(idAlbum, pageable));
     }
@@ -36,11 +41,6 @@ public class AlbumSontController {
     @GetMapping("/artist/{idartist}")
     public ResponseEntity<?> findArtist(@PathVariable("idartist") Long idArtist, Pageable pageable) {
         return ResponseEntity.ok(albumSongsService.findAllByIdCategory(idArtist, pageable));
-    }
-
-    @GetMapping("/song/{id}")
-    public ResponseEntity<?> findSongById(@PathVariable Long id) {
-        return ResponseEntity.ok(albumSongsService.findSongById(id));
     }
 
     @GetMapping("/{id}")
@@ -64,11 +64,12 @@ public class AlbumSontController {
     public ResponseEntity<?> saveAlbum(
             @RequestParam("image") MultipartFile imagefile,
             @RequestParam("title") String title,
-            @RequestParam("categorylist") List<Long> idcategories,
-            @RequestParam("artistlist") List<Long> idartist
+            @RequestParam("categorylist") String idcategories,
+            @RequestParam("artistlist") String idartist
     ) {
+
         AlbumDto albumDto = AlbumDto.builder().idArtists(idartist).idCategories(idcategories)
-                .title(title).idCategories(idcategories).build();
+                .title(title).imagefile(imagefile).build();
         return ResponseEntity.status(201).body(albumSongsService.saveAlbum(albumDto));
     }
 

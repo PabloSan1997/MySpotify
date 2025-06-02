@@ -15,6 +15,6 @@ import java.util.List;
 public class AlbumDto {
     private String title;
     private MultipartFile imagefile;
-    private List<Long> idArtists;
-    private List<Long> idCategories;
+    private String idArtists;
+    private String idCategories;
 }

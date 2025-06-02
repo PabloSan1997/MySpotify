@@ -71,7 +71,7 @@ public class SecurityConfig {
                         "/api/category/{id}",
                         "/api/artist/{id}",
                         "/api/album/{id}",
-                        "/api/album/song/{{idalbum}}"
+                        "/api/album/song/{idalbum}"
                 ).hasRole("ADMIN")
                 .requestMatchers(
                         HttpMethod.POST,

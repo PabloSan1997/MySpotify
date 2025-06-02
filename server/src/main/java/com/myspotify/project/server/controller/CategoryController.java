@@ -18,10 +18,17 @@ public class CategoryController {
     public ResponseEntity<?> findAll(Pageable pageable){
         return ResponseEntity.ok(categoryService.findAll(pageable));
     }
+
     @GetMapping("/album/{idalbum}")
     public ResponseEntity<?> findAllByIdAlbum(@PathVariable("idalbum") Long idAlbum, Pageable pageable){
         return ResponseEntity.ok(categoryService.findAllByIdAlbum(idAlbum, pageable));
     }
+
+    @GetMapping("/artist/{idartist}")
+    public ResponseEntity<?> findAllByIdArtist(@PathVariable("idartist") Long idArtist, Pageable pageable){
+        return ResponseEntity.ok(categoryService.findAllByIdArtist(idArtist, pageable));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> findAllByIdAlbum(@PathVariable Long id){
         return ResponseEntity.ok(categoryService.findCategoryById(id));

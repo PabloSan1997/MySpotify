@@ -1,5 +1,6 @@
 package com.myspotify.project.server.services.imp;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myspotify.project.server.exceptions.MyBadRequestException;
 import com.myspotify.project.server.exceptions.MyFireBaseException;
 import com.myspotify.project.server.models.*;
@@ -40,6 +41,12 @@ public class AppServiceImp implements CategoryService, ArtistService, AlbumSongs
     @Transactional
     public List<Category> findAllByIdAlbum(Long idAlbum, Pageable pageable) {
         return categoryRepository.findAllByIdAlbum(idAlbum, pageable);
+    }
+
+    @Override
+    @Transactional
+    public List<Category> findAllByIdArtist(Long idArtist, Pageable pageable) {
+        return categoryRepository.findAllByIdArtist(idArtist, pageable);
     }
 
     @Override
@@ -134,7 +141,7 @@ public class AppServiceImp implements CategoryService, ArtistService, AlbumSongs
     @Override
     @Transactional
     public List<Album> findAllAlbums(Pageable pageable) {
-        return List.of();
+        return albumRepository.findAll(pageable);
     }
 
     @Override
@@ -183,12 +190,18 @@ public class AppServiceImp implements CategoryService, ArtistService, AlbumSongs
     @Transactional
     public Album saveAlbum(AlbumDto albumDto) {
         try{
+            List<Long> idcategory = List.of(new ObjectMapper().readValue(albumDto.getIdCategories(), Long[].class));
+            List<Long> idartist= List.of(new ObjectMapper().readValue(albumDto.getIdArtists(), Long[].class));
+
             FileDto fileDto = fireBaseRepository.saveFile(albumDto.getImagefile(), false);
-            List<Category> categories = (List<Category>) categoryRepository.findAllById(albumDto.getIdCategories());
-            List<Artist> artists = (List<Artist>) artistRepository.findAllById(albumDto.getIdArtists());
+
+            List<Category> categories = (List<Category>) categoryRepository.findAllById(idcategory);
+            List<Artist> artists = (List<Artist>) artistRepository.findAllById(idartist);
+
             Album album = Album.builder()
                     .urlImage(fileDto.getUrlfile())
                     .artists(artists)
+                    .title(albumDto.getTitle())
                     .categories(categories)
                     .urlImage(fileDto.getUrlfile())
                     .imagefilename(fileDto.getIdfirebase())

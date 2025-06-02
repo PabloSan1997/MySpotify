@@ -2,6 +2,7 @@ package com.myspotify.project.server.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,12 +30,24 @@ public class Album {
     @JsonIgnore
     private String imagefilename;
 
-    @ManyToMany(mappedBy = "albums")
-    @JsonIgnore
+    @ManyToMany
+    @JsonIgnoreProperties({"albums"})
+    @JoinTable(
+            name = "artista_album",
+            joinColumns = @JoinColumn(name = "id_album"),
+            inverseJoinColumns = @JoinColumn(name = "id_artista"),
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"id_album", "id_artista"})}
+    )
     private List<Artist> artists;
 
-    @ManyToMany(mappedBy = "albums")
-    @JsonIgnore
+    @ManyToMany
+    @JsonIgnoreProperties({"albums"})
+    @JoinTable(
+            name = "category_album",
+            joinColumns = @JoinColumn(name = "id_album"),
+            inverseJoinColumns = @JoinColumn(name = "id_category"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"id_album", "id_category"})
+    )
     private List<Category> categories;
 
     @OneToMany(mappedBy = "album", orphanRemoval = true, cascade = CascadeType.ALL)
