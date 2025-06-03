@@ -1,0 +1,54 @@
+@use 'colors.scss' as *;
+
+.login_form{
+    margin:2rem auto;
+    width: 30rem;
+    background: $fondo1;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    h2{
+        margin:1rem auto;
+    }
+    label{
+        margin-bottom: 0.2rem;
+    }
+    input{
+        margin-bottom: 0.8rem;
+        padding: 2px;
+        font-size: 1.2rem;
+        box-sizing: border-box;
+    }
+    button{
+        margin: auto;
+        padding: 0.2rem 0.5rem;
+    }
+    &.perfil_form{
+        margin-top: 0.5rem;
+        background: none;
+        width: 100%;
+        input{
+            display: none;
+        }
+        label{
+            margin: auto;
+            padding: 10px 40px;
+            border: 2px solid white;
+            border-radius: 10px;
+            cursor: pointer;
+            &:hover{
+                background: rgba(255, 255, 255, 0.103);
+            }
+        }
+        button{
+            margin-top: 1rem;
+        }
+        .preview_image{
+            max-width: 5em;
+            max-height: 6rem;
+            margin:1rem auto 0;
+        }
+    }
+}

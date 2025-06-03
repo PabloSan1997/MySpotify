@@ -1,0 +1,47 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .info_user {
+        margin-top: 0.5rem;
+        img {
+            border-radius: 100%;
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: auto 0 auto 0;
+        }
+
+        display: flex;
+
+        .area_names {
+            display: flex;
+            flex-direction: column;
+            margin: auto 0.5rem;
+            span{
+                margin: auto 0;
+            }
+            .username{
+                font-size: 0.8rem;
+            }
+            .nickname{
+                font-size: 1.1rem;
+                margin-bottom: 0.2rem;
+            }
+        }
+    }
+
+    nav{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        a{
+            color: white;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            &.active{
+                font-weight: bold;
+            }
+        }
+    }
+}
