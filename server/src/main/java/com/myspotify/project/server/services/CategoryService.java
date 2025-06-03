@@ -1,6 +1,7 @@
 package com.myspotify.project.server.services;
 
 import com.myspotify.project.server.models.Category;
+import com.myspotify.project.server.models.dtos.CategoryList;
 import com.myspotify.project.server.models.dtos.MainInfoDto;
 import org.springframework.data.domain.Pageable;
 
@@ -10,6 +11,7 @@ public interface CategoryService {
     List<Category> findAll(Pageable pageable);
     List<Category> findAllByIdAlbum(Long idAlbum, Pageable pageable);
     List<Category> findAllByIdArtist(Long idArtist, Pageable pageable);
+    List<CategoryList> findCategoryListSongs(Pageable pageable);
     Category saveCategory(MainInfoDto categoryDto);
     Category updateCategoryImageName(Long id, MainInfoDto categoryDto);
     Category findCategoryById(Long id);

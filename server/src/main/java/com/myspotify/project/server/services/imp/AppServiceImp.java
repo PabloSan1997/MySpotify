@@ -5,6 +5,7 @@ import com.myspotify.project.server.exceptions.MyBadRequestException;
 import com.myspotify.project.server.exceptions.MyFireBaseException;
 import com.myspotify.project.server.models.*;
 import com.myspotify.project.server.models.dtos.AlbumDto;
+import com.myspotify.project.server.models.dtos.CategoryList;
 import com.myspotify.project.server.models.dtos.FileDto;
 import com.myspotify.project.server.models.dtos.MainInfoDto;
 import com.myspotify.project.server.repositories.*;
@@ -12,6 +13,7 @@ import com.myspotify.project.server.services.AlbumSongsService;
 import com.myspotify.project.server.services.ArtistService;
 import com.myspotify.project.server.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,6 +49,20 @@ public class AppServiceImp implements CategoryService, ArtistService, AlbumSongs
     @Transactional
     public List<Category> findAllByIdArtist(Long idArtist, Pageable pageable) {
         return categoryRepository.findAllByIdArtist(idArtist, pageable);
+    }
+
+    @Override
+    @Transactional
+    public List<CategoryList> findCategoryListSongs(Pageable pageable) {
+        List<Category> categories = categoryRepository.findAll(pageable);
+        return categories.stream()
+                .map(c-> {
+                    var clist = CategoryList.builder()
+                            .urlImage(c.getUrlImage()).id(c.getId()).title(c.getTitle()).build();
+                    List<Album> albums = albumRepository.findAllByCategory(c.getId(), PageRequest.of(0,5));
+                    clist.setAlbums(albums);
+                    return clist;
+                }).toList();
     }
 
     @Override
