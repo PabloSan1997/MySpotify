@@ -33,7 +33,7 @@ public class AlbumSontController {
         return ResponseEntity.ok(albumSongsService.findByIdAlbum(idAlbum, pageable));
     }
 
-    @GetMapping("/categor/{idcategory}")
+    @GetMapping("/category/{idcategory}")
     public ResponseEntity<?> findCategory(@PathVariable("idcategory") Long idCategory, Pageable pageable) {
         return ResponseEntity.ok(albumSongsService.findAllByIdCategory(idCategory, pageable));
     }
