@@ -29,3 +29,51 @@ interface RegisterDto {
 	password: string,
 	nickname: string;
 }
+
+// procesos
+
+interface Category {
+	id: number;
+	title: string;
+	urlImage: string;
+}
+interface Artist {
+	id: number,
+	name: string,
+	urlImage: string;
+}
+
+interface Album {
+	id: number;
+	title: string;
+	urlImage: string;
+	artists: Artist[];
+	categories: Category[];
+}
+
+interface Song {
+	id: number;
+	title: string;
+	urlImage: string;
+	urlAudio: string;
+	album: Album;
+}
+interface CategoryList extends Category {
+	albums: {
+		id: number,
+		title: string,
+		urlImage: string;
+	}[];
+}
+
+interface InitialStateApp{
+	songs:Songs[],
+	onesong:Songs;
+	albums:Album[],
+	category:Category[],
+	categoryList:CategoryList[],
+	oneCategory:Category;
+	oneAlbum:Album;
+	artists:Artist[];
+	oneArtist:Artist;
+}

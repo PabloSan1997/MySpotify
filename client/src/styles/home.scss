@@ -1,0 +1,73 @@
+@use 'colors.scss' as *;
+
+.title {
+    margin: 1rem auto 0 auto;
+    width: fit-content;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    margin-top: 1rem;
+
+    .section {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+
+        &.category_list {
+            h3 {
+                padding: 5px;
+                margin-bottom: 0.5rem;
+                a{
+                    color: white;
+                    text-decoration: none;
+                    width: 100%;
+                    display: flex;
+                }
+                cursor: pointer;
+                &:hover{
+                    background: $fondohover;
+                }
+            }
+
+            width: 100%;
+
+            .albums {
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                margin-bottom: 2rem;
+                gap: 2rem;
+
+                .album {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 0.4rem;
+                    padding: 5px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    &:hover {
+                        background: $fondohover;
+                    }
+
+                    img {
+                        max-width: 80%;
+                        margin-top: 4px;
+                        margin-bottom: auto;
+                    }
+
+                    h4 {
+                        margin-top: 0.3rem;
+                        font-size: .8rem;
+                        color: $letra1;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+@use 'colors.scss' as *;
+
+.title2 {
+    color: $letra1;
+}
+
+.contenedor_album {
+    width: 100%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+
+    .album {
+        display: flex;
+        margin-bottom: 1rem;
+        padding: 0.3rem;
+        border-radius: 5px;
+        cursor: pointer;
+        img {
+            width: 5rem;
+        }
+
+        .area_info {
+            display: flex;
+             flex-direction: column;
+             margin-left: 1rem;
+             .artists, .categories{
+                margin-top: 0.2rem;
+                display: flex;
+                span{
+                    margin-right: 0.5rem;
+                }
+             }
+        }
+
+        &:hover {
+            background: $fondohover;
+
+        }
+    }
+}

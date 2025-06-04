@@ -1,3 +1,5 @@
+@use 'colors.scss' as *;
+
 .info {
     display: flex;
     flex-direction: column;
@@ -36,11 +38,15 @@
         flex-direction: column;
         margin-top: 1rem;
         a{
-            color: white;
+            color: $letra1;
             text-decoration: none;
             margin-bottom: 0.5rem;
+            &:hover{
+                color: white;
+            }
             &.active{
                 font-weight: bold;
+                color: white;
             }
         }
     }

@@ -4,7 +4,7 @@ import { loginstorage } from "../../utils/loginstorage";
 
 
 
-const urlbase = 'http://localhost:3007/api'
+export const urlbase = 'http://localhost:3007/api'
 
 export const loginExtrareducer = createAsyncThunk(
     'extrareducer/login',
