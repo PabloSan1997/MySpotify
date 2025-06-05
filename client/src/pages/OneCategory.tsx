@@ -8,6 +8,7 @@ import { Navigate, useSearchParams } from "react-router-dom";
 import { routesname } from "../routes/routesname";
 import { AlbumCom } from "../components/AlbumCom";
 import '../styles/onecategory.scss';
+import { CategoryCom } from "../components/CategoryCom";
 
 export function OneCategory() {
     const appState = useAppSelector(state => state.app);
@@ -30,6 +31,16 @@ export function OneCategory() {
             <h3 className="title2">Albums</h3>
             <div className="contenedor contenedor_album">
                 {appState.albums.map(s => <AlbumCom key={s.id} {...s} />)}
+            </div>
+            <h3 className="title3">Artista</h3>
+            <div className="contenedor contenedor_list">
+                {appState.artists.map(c => (<CategoryCom
+                    key={c.id}
+                    id={c.id}
+                    urlImage={c.urlImage}
+                    title={c.name}
+                    pathbase={routesname.oneartist}
+                />))}
             </div>
         </>
     );

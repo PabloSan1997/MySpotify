@@ -9,6 +9,7 @@ import { Home } from "../pages/Home";
 import { CategoriesPage } from "../pages/CategoriesPage";
 import { Artistas } from "../pages/Artistas";
 import { OneCategory } from "../pages/OneCategory";
+import { OneArtist } from "../pages/OneArtist";
 
 const Routes = () => useRoutes([
     {
@@ -42,6 +43,10 @@ const Routes = () => useRoutes([
     {
         path:routesname.category,
         element:<MainLayout><OneCategory/></MainLayout>
+    },
+    {
+        path:routesname.oneartist,
+        element:<MainLayout><OneArtist/></MainLayout>
     }
 ]);
 
