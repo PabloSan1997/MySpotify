@@ -21,13 +21,17 @@ export function OneCategory() {
     React.useEffect(() => {
         dispatch(findOneCategory({ jwt: userState.jwt, id }));
     }, [userState.jwt]);
-
     if (id === 0)
         return <Navigate to={routesname.home} />
 
     return (
         <>
-            <h2 className="title">{appState.oneCategory.title}</h2>
+            <div className="oneartist_info">
+                <div className="shadow" style={{ backgroundImage: `url(${appState.oneCategory.urlImage})` }}></div>
+                <img src={appState.oneCategory.urlImage} alt={appState.oneCategory.title} />
+                <h2 className="title">{appState.oneCategory.title}</h2>
+            </div>
+
             <h3 className="title2">Albums</h3>
             <div className="contenedor contenedor_album">
                 {appState.albums.map(s => <AlbumCom key={s.id} {...s} />)}

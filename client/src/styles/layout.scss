@@ -20,6 +20,10 @@ main {
         &.area_info {
             width: 48%;
         }
+        &.area_anuncio{
+            display: flex;
+            flex-direction: column;
+        }
     }
 }
 

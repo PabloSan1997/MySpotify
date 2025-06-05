@@ -1,9 +1,15 @@
+import { useNavigate } from "react-router-dom";
+import { routesname } from "../routes/routesname";
 
 
 
-export function AlbumCom({ title, urlImage, artists, categories }: Album) {
+export function AlbumCom({ title, urlImage, artists, categories, id }: Album) {
+    const navigate = useNavigate();
+    const go = () => {
+        navigate(`${routesname.onealbum}?id=${id}`);
+    }
     return (
-        <div className="album">
+        <div className="album" onClick={go}>
             <img src={urlImage} alt={title} />
             <div className="area_info">
                 <h3>{title}</h3>

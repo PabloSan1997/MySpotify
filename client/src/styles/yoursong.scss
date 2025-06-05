@@ -1,0 +1,48 @@
+@use 'colors.scss' as *;
+
+.title_songs {
+    color: $letra1;
+    margin-top: 1rem;
+}
+
+.contenedor_yoursong {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    height: 55%;
+
+    .your_one_song {
+        margin-top: 1rem;
+        display: flex;
+        cursor: pointer;
+        padding: 5px;
+        box-sizing: border-box;
+        border-radius: 8px;
+
+        &:hover {
+            background: $fondohover;
+        }
+
+        img {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .area_info{
+            margin-left: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            .title{
+                margin-top: 0;
+                margin-left: 0;
+                margin-bottom: 0.2rem;
+            }
+            .artist{
+                font-size: 0.7rem;
+                span{
+                    margin-right: 0.5rem;
+                }
+            }
+        }
+    }
+}

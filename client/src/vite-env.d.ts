@@ -67,8 +67,8 @@ interface CategoryList extends Category {
 }
 
 interface InitialStateApp{
-	songs:Songs[],
-	onesong:Songs;
+	songs:Song[],
+	onesong:Song;
 	albums:Album[],
 	category:Category[],
 	categoryList:CategoryList[],

@@ -23,7 +23,7 @@ export function OneArtist() {
         <>
             <div className="oneartist_info">
                 <div className="shadow" style={{backgroundImage:`url(${appState.oneArtist.urlImage})`}}></div>
-                <img src={appState.oneArtist.urlImage} alt={appState.oneAlbum.title} />
+                <img src={appState.oneArtist.urlImage} alt={appState.oneArtist.name} />
                 <h2 className="title">{appState.oneArtist.name}</h2>
             </div>
             <h3 className="title2">Albums</h3>

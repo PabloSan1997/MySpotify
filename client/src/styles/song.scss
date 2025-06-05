@@ -1,0 +1,70 @@
+@use 'colors.scss' as *;
+
+$width1:40%;
+$width2:20%;
+
+.contenedor_songs {
+    flex-direction: column;
+    width: 100%;
+    margin: 1rem auto;
+    .rawheader {
+        color: $letra1;
+        border-bottom: 1px solid $letra1;
+        width: 100%;
+        display: flex;
+        .col1{
+            width: $width1;
+        }
+        .col2{
+             width: calc(100% - $width1 - $width2);
+        }
+        .col3{
+            width: $width2;
+        }
+    }
+
+    .song {
+        display: flex;
+        margin-top: 1rem;
+        width: 100%;
+        border-radius: 5px;
+        padding:8px 5px;
+        box-sizing: border-box;
+        &:hover{
+            background: $fondohover;
+            cursor: pointer;
+        }
+        .column {
+            font-size: .8rem;
+            width: 100%;
+            display: flex;
+            span {
+                margin: auto 0;
+            }
+
+              &.titlecolum {
+                width: $width1;
+                img {
+                    width: 2.5rem;
+                    height: 2.8rem;
+                }
+
+                h3 {
+                    font-weight: 400;
+                    margin-left: 0.5rem;
+                }
+            }
+            &.column_artist {
+                display: flex;
+                width: calc(100% - $width1 - $width2);
+                span {
+                    margin-right: 0.4rem;
+                }
+            }
+            &.column_duration{
+                width: $width2;
+            }
+            
+        }
+    }
+}
