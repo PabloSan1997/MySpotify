@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface AlbumSongsService {
     Songs findSongById(Long id);
+    List<Songs> findOnlySongs();
     List<Songs> findByIdAlbum(Long id, Pageable pageable);
     List<Album> findAllAlbums(Pageable pageable);
     List<Album> findAllIdArtist(Long idArtist, Pageable pageable);

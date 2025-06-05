@@ -27,6 +27,10 @@ public class AlbumSontController {
     public ResponseEntity<?> findSongById(@PathVariable Long id) {
         return ResponseEntity.ok(albumSongsService.findSongById(id));
     }
+    @GetMapping("/song/random")
+    public ResponseEntity<?> findSongRandom() {
+        return ResponseEntity.ok(albumSongsService.findOnlySongs());
+    }
 
     @GetMapping("/song/{idalbum}")
     public ResponseEntity<?> findSongs(@PathVariable("idalbum") Long idAlbum, Pageable pageable) {
@@ -40,7 +44,7 @@ public class AlbumSontController {
 
     @GetMapping("/artist/{idartist}")
     public ResponseEntity<?> findArtist(@PathVariable("idartist") Long idArtist, Pageable pageable) {
-        return ResponseEntity.ok(albumSongsService.findAllByIdCategory(idArtist, pageable));
+        return ResponseEntity.ok(albumSongsService.findAllIdArtist(idArtist, pageable));
     }
 
     @GetMapping("/{id}")

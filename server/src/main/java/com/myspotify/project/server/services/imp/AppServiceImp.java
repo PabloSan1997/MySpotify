@@ -181,6 +181,12 @@ public class AppServiceImp implements CategoryService, ArtistService, AlbumSongs
 
     @Override
     @Transactional
+    public List<Songs> findOnlySongs() {
+        return songRepository.findRandomSongs(PageRequest.of(0, 8));
+    }
+
+    @Override
+    @Transactional
     public List<Songs> findByIdAlbum(Long id, Pageable pageable) {
         return songRepository.findSongsByAlbumId(id);
     }
