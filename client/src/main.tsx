@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/main.scss';
+import './styles/rango.scss';
 import { Provider } from 'react-redux';
 import { store } from './store.ts';
 import { RoutsIndex } from './routes/RoutsIndex.tsx';
