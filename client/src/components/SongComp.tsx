@@ -1,9 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useMemo } from "react";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { findOneSongExtraReducer } from "../slices/extraReducers/appExtraReducer";
 
 
-export function SongComp({ title, urlAudio, urlImage, album }: Song) {
-
+export function SongComp({ title, urlAudio, urlImage, album, id }: Song) {
+    const dispatch = useAppDispatch();
+    const jwt = useAppSelector(state => state.user.jwt);
     const [min, setMin] = React.useState('');
     const audio = useMemo(() => new Audio(), []);
 
@@ -19,7 +22,7 @@ export function SongComp({ title, urlAudio, urlImage, album }: Song) {
     }, []);
 
     return (
-       <div className="song">
+       <div className="song" onClick={()=> dispatch(findOneSongExtraReducer({id, jwt}))}>
         <div className="column titlecolum">
             <img src={urlImage} alt={title} />
             <h3>{title}</h3>

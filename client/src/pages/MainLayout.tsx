@@ -7,6 +7,7 @@ import '../styles/layout.scss';
 import { IntroComponent } from "../components/IntroComponent";
 import { YourSongs } from "../components/YourSongs";
 import { AdsPart } from "../components/AdsPart";
+import { SongPlay } from "../components/SongPlay";
 
 export function MainLayout({children}:React.PropsWithChildren) {
   const userstate = useAppSelector(state => state.user);
@@ -29,6 +30,7 @@ export function MainLayout({children}:React.PropsWithChildren) {
         </div>
       </main>
       <div className="area_play">
+        <SongPlay/>
       </div>
     </>
   );

@@ -1,0 +1,68 @@
+@use 'colors.scss' as *;
+
+.area_play{
+    display: flex;
+    button{
+        width: 2rem;
+        background: none;
+        border: none;
+        .play_icon{
+            width: 100%;
+            color: rgb(31, 190, 10);
+        }
+    }
+    .your_one_song{
+        width: 20%;
+        display: flex;
+        padding-block: 5px;
+        margin: auto auto auto 0;
+        box-sizing: border-box;
+        .area_info{
+            margin:auto auto auto 1rem;
+            .title{
+                font-size: 1rem;
+            }
+            .artist{
+                display: flex;
+                span{
+                    margin-right: 0.3rem;
+                    font-size: 0.7rem;
+                    margin-top: 0.4rem;
+                    color: $letra1;
+                }
+            }
+        }
+        img{
+            width: 4rem;
+            height: 4rem;
+            margin: auto 0 auto auto;
+            border-radius: 8px;
+        }
+    }
+    .area_controls{
+        display: flex;
+        width: 40%;
+        margin: auto;
+        height: 100%;
+        flex-direction: column;
+        .area_button{
+            height: 65%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .area_time{
+            display: flex;
+            input{
+                width: 100%;
+            }
+            span{
+                margin-inline: 0.5rem;
+            }
+        }
+    }
+    .area_extra{
+        margin: auto 0 auto auto;
+        width: 20%;
+    }
+}

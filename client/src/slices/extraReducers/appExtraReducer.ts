@@ -175,6 +175,21 @@ export const findSongsExtraReducer = createAsyncThunk(
     }
 );
 
+export const findOneSongExtraReducer = createAsyncThunk(
+    'extrareducer/onesong',
+    async ({jwt, id}:{jwt:string, id:number}):Promise<Song>=>{
+        const ft = await fetch(`${urlbase}/album/song/onesong/${id}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${jwt}`
+            }
+        });
+
+        if (!ft.ok) throw { message: 'Problemas con la lista de canciones' };
+        return ft.json();
+    }
+);
+
 export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp>) {
     builder.addCase(findListCategoryExtraReducer.fulfilled, (state, action) => {
         state.albums = initialStateApp.albums;
@@ -246,6 +261,9 @@ export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp
     });
     builder.addCase(findSongsExtraReducer.fulfilled, (state, action)=>{
         state.songs = action.payload;
+    });
+    builder.addCase(findOneSongExtraReducer.fulfilled, (state, action)=>{
+        state.onesong = action.payload;
     });
 }
 
