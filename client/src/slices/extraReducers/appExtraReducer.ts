@@ -190,6 +190,24 @@ export const findOneSongExtraReducer = createAsyncThunk(
     }
 );
 
+// ---------Admin extrareducers--------------------
+
+export const createDataExtraReducer = createAsyncThunk(
+    'extrareducer/createcategory',
+    async ({jwt, formdata, option}:{jwt:string, formdata:FormData, option:string}):Promise<void>=>{
+         const ft = await fetch(`${urlbase}/${option}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${jwt}`
+            },
+            body:formdata
+        });
+
+        if (!ft.ok) throw { message: 'Problemas con la lista de canciones' };
+        return ft.json();
+    }
+); 
+
 export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp>) {
     builder.addCase(findListCategoryExtraReducer.fulfilled, (state, action) => {
         restartApp(state);
@@ -234,6 +252,9 @@ export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp
     });
     builder.addCase(findOneSongExtraReducer.fulfilled, (state, action) => {
         state.onesong = action.payload;
+    });
+    builder.addCase(createDataExtraReducer.fulfilled, ()=>{
+        window.location.reload();
     });
 }
 

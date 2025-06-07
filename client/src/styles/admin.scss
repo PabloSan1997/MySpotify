@@ -1,0 +1,88 @@
+@use 'colors.scss' as *;
+
+.area_part {
+    margin: 1rem auto;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    .option {
+        border: none;
+        background: none;
+        color: $letra1;
+        font-size: 1.2rem;
+        cursor: pointer;
+        text-decoration: none;
+
+        &:hover {
+            color: white;
+        }
+
+        &:active,
+        &.active {
+            color: white;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+    }
+}
+
+.contenedor_admin {
+    width: 90%;
+    margin: auto;
+
+    .form_admin {
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        label {
+            margin-bottom: 0.2rem;
+
+            &.add_file {
+                margin: 1rem auto 0 0;
+                width: fit-content;
+                padding: 5px;
+                border: 2px solid white;
+                border-radius: 10px;
+                cursor: pointer;
+                font-size: 0.8rem;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.103);
+                }
+            }
+        }
+
+        input {
+            padding: 2px;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+        }
+
+        img {
+            width: 5rem;
+            margin: auto;
+        }
+
+        button {
+            margin: 1rem auto;
+            padding: 10px 40px;
+            border: 2px solid white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            background: none;
+            color: white;
+            &:hover {
+                background: rgba(255, 255, 255, 0.103);
+            }
+        }
+    }
+}
