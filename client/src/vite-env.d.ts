@@ -10,6 +10,7 @@ interface UserInitialState {
 	jwt: string;
 	userinfo: UserInfo;
 	message: string;
+	isAdmin:boolean;
 }
 
 interface LoginDto {

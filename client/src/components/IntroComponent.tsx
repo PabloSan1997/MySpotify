@@ -26,6 +26,7 @@ export function IntroComponent() {
         </div>
         <nav>
             <NavLink to={routesname.home}>Incio</NavLink>
+            {userstate.isAdmin && <NavLink to={routesname.admin}>Admin</NavLink>}
             <NavLink to={routesname.perfil}>Perfil</NavLink>
             <NavLink to={routesname.artists}>Artistas</NavLink>
             <NavLink to={routesname.categories}>Categorias</NavLink>

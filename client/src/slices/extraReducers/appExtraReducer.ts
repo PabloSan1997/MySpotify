@@ -142,7 +142,7 @@ export const findOneArtistExtraReducer = createAsyncThunk(
 
 export const findSongByAlbumExtraReducer = createAsyncThunk(
     'extrareducer/albumbyprop',
-    async ({ jwt, id }: { jwt: string, id: number}): Promise<{song:Song[], album:Album}> => {
+    async ({ jwt, id }: { jwt: string, id: number }): Promise<{ song: Song[], album: Album }> => {
         const ft = await fetch(`${urlbase}/album/song/${id}`, {
             method: 'GET',
             headers: {
@@ -150,20 +150,20 @@ export const findSongByAlbumExtraReducer = createAsyncThunk(
             }
         });
         const ft2 = await fetch(`${urlbase}/album/${id}`, {
-             method: 'GET',
+            method: 'GET',
             headers: {
                 'Authorization': `Bearer ${jwt}`
             }
         });
         if (!ft.ok || !ft2.ok) throw { message: 'Problemas con la lista de artistas' };
-        return {song: await ft.json(), album: await ft2.json()}
+        return { song: await ft.json(), album: await ft2.json() }
     }
 );
 
 export const findSongsExtraReducer = createAsyncThunk(
     'extrareducer/songs',
-    async({jwt}:{jwt:string}):Promise<Song[]>=>{
-         const ft = await fetch(`${urlbase}/album/song/random`, {
+    async ({ jwt }: { jwt: string }): Promise<Song[]> => {
+        const ft = await fetch(`${urlbase}/album/song/random`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${jwt}`
@@ -177,7 +177,7 @@ export const findSongsExtraReducer = createAsyncThunk(
 
 export const findOneSongExtraReducer = createAsyncThunk(
     'extrareducer/onesong',
-    async ({jwt, id}:{jwt:string, id:number}):Promise<Song>=>{
+    async ({ jwt, id }: { jwt: string, id: number }): Promise<Song> => {
         const ft = await fetch(`${urlbase}/album/song/onesong/${id}`, {
             method: 'GET',
             headers: {
@@ -192,42 +192,22 @@ export const findOneSongExtraReducer = createAsyncThunk(
 
 export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp>) {
     builder.addCase(findListCategoryExtraReducer.fulfilled, (state, action) => {
-        state.albums = initialStateApp.albums;
-        state.category = initialStateApp.category;
-        state.oneCategory = initialStateApp.oneCategory;
-        state.oneAlbum = initialStateApp.oneAlbum;
-        state.artists = initialStateApp.artists;
-        state.oneArtist = initialStateApp.oneArtist;
+        restartApp(state);
 
         state.categoryList = action.payload;
     });
     builder.addCase(findCategoriesExtraReducer.fulfilled, (state, action) => {
-        state.albums = initialStateApp.albums;
-        state.category = initialStateApp.category;
-        state.oneCategory = initialStateApp.oneCategory;
-        state.oneAlbum = initialStateApp.oneAlbum;
-        state.artists = initialStateApp.artists;
-        state.oneArtist = initialStateApp.oneArtist;
+        restartApp(state);
 
         state.category = action.payload;
     });
     builder.addCase(findArtistsExtraReducer.fulfilled, (state, action) => {
-        state.albums = initialStateApp.albums;
-        state.category = initialStateApp.category;
-        state.oneCategory = initialStateApp.oneCategory;
-        state.oneAlbum = initialStateApp.oneAlbum;
-        state.artists = initialStateApp.artists;
-        state.oneArtist = initialStateApp.oneArtist;
+        restartApp(state);
 
         state.artists = action.payload;
     });
     builder.addCase(findOneCategory.fulfilled, (state, action) => {
-        state.albums = initialStateApp.albums;
-        state.category = initialStateApp.category;
-        state.oneCategory = initialStateApp.oneCategory;
-        state.oneAlbum = initialStateApp.oneAlbum;
-        state.artists = initialStateApp.artists;
-        state.oneArtist = initialStateApp.oneArtist;
+        restartApp(state);
 
 
         state.albums = action.payload.albums;
@@ -236,36 +216,32 @@ export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp
     });
 
     builder.addCase(findOneArtistExtraReducer.fulfilled, (state, action) => {
-        state.albums = initialStateApp.albums;
-        state.category = initialStateApp.category;
-        state.oneCategory = initialStateApp.oneCategory;
-        state.oneAlbum = initialStateApp.oneAlbum;
-        state.artists = initialStateApp.artists;
-        state.oneArtist = initialStateApp.oneArtist;
+        restartApp(state);
 
 
         state.albums = action.payload.albums;
         state.oneArtist = action.payload.artist;
     });
     builder.addCase(findSongByAlbumExtraReducer.fulfilled, (state, action) => {
-        state.albums = initialStateApp.albums;
-        state.category = initialStateApp.category;
-        state.oneCategory = initialStateApp.oneCategory;
-        state.oneAlbum = initialStateApp.oneAlbum;
-        state.artists = initialStateApp.artists;
-        state.oneArtist = initialStateApp.oneArtist;
+        restartApp(state);
 
 
         state.songs = action.payload.song;
         state.oneAlbum = action.payload.album;
     });
-    builder.addCase(findSongsExtraReducer.fulfilled, (state, action)=>{
+    builder.addCase(findSongsExtraReducer.fulfilled, (state, action) => {
         state.songs = action.payload;
     });
-    builder.addCase(findOneSongExtraReducer.fulfilled, (state, action)=>{
+    builder.addCase(findOneSongExtraReducer.fulfilled, (state, action) => {
         state.onesong = action.payload;
     });
 }
 
-
-
+function restartApp(state: InitialStateApp) {
+    state.albums = initialStateApp.albums;
+    state.artists = initialStateApp.artists;
+    state.category = initialStateApp.category;
+    state.categoryList = initialStateApp.categoryList;
+    state.oneAlbum = initialStateApp.oneAlbum;
+    state.oneArtist = initialStateApp.oneArtist;
+}

@@ -9,7 +9,7 @@ import { YourSongs } from "../components/YourSongs";
 import { AdsPart } from "../components/AdsPart";
 import { SongPlay } from "../components/SongPlay";
 
-export function MainLayout({children}:React.PropsWithChildren) {
+export function MainLayout({ children }: React.PropsWithChildren) {
   const userstate = useAppSelector(state => state.user);
   if (!userstate.jwt.trim())
     return <Navigate to={routesname.login} />
@@ -18,19 +18,19 @@ export function MainLayout({children}:React.PropsWithChildren) {
       <Header />
       <main>
         <div className="area_main area_intro">
-          <IntroComponent/>
-           <YourSongs/>
+          <IntroComponent />
+          <YourSongs />
         </div>
         <div className="area_main area_info">
           {children}
         </div>
         <div className="area_main area_anuncio">
-          <AdsPart/>
-          <AdsPart/>
+          <AdsPart />
+          <AdsPart />
         </div>
       </main>
       <div className="area_play">
-        <SongPlay/>
+        <SongPlay />
       </div>
     </>
   );

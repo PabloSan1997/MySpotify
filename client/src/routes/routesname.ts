@@ -9,5 +9,6 @@ export const routesname = {
     category:'/category',
     onealbum:'/onealbum',
     artists:'/artist',
-    oneartist:'/oneartist'
+    oneartist:'/oneartist',
+    admin:'/admin'
 }

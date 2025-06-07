@@ -11,6 +11,7 @@ import { Artistas } from "../pages/Artistas";
 import { OneCategory } from "../pages/OneCategory";
 import { OneArtist } from "../pages/OneArtist";
 import { OneAlbum } from "../pages/OneAlbum";
+import { AdminPage } from "../pages/AdminPage";
 
 const Routes = () => useRoutes([
     {
@@ -52,6 +53,10 @@ const Routes = () => useRoutes([
     {
         path:routesname.onealbum,
         element:<MainLayout><OneAlbum/></MainLayout>
+    },
+    {
+        path:routesname.admin,
+        element:<MainLayout><AdminPage/></MainLayout>
     }
 ]);
 

@@ -9,7 +9,8 @@ const initialState: UserInitialState = {
         nickname: "",
         urlImage: ""
     },
-    message: ""
+    message: "",
+    isAdmin:false
 }
 
 const userSlice = createSlice({
