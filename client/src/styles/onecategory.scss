@@ -50,15 +50,34 @@
     height: 10rem;
     margin-bottom: 1.4rem;
     position: relative;
-    .area_info{
-        h2{
+
+    .area_add_icon {
+           width: 3rem;
+            position: absolute;
+            right: 0.0rem;
+            top: 0.5rem;
+        .add_icon {
+            color: white;
+            opacity: 0.5;
+            width: 100%;
+            cursor: pointer;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    .area_info {
+        h2 {
             margin-bottom: 0;
         }
-        h3{
+
+        h3 {
             font-weight: 400;
             font-size: 1rem;
-            margin-top:0.5rem;
-            span{
+            margin-top: 0.5rem;
+
+            span {
                 font-weight: bold;
                 margin-right: 0.5rem;
             }
@@ -69,8 +88,9 @@
         position: relative;
         z-index: 2;
     }
-    .shadow{
-        width:100%;
+
+    .shadow {
+        width: 100%;
         left: 0;
         right: 0;
         margin: auto;
@@ -78,11 +98,12 @@
         background-image: inherit;
         position: absolute;
         background-position: center;
-        
+
         z-index: 0;
-        filter:blur(5rem);
-        
+        filter: blur(5rem);
+
     }
+
     img {
         max-width: 10rem;
         max-height: 85%;

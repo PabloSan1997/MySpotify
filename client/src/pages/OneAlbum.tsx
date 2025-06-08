@@ -2,12 +2,15 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { findSongByAlbumExtraReducer } from "../slices/extraReducers/appExtraReducer";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { SongComp } from "../components/SongComp";
 import '../styles/song.scss';
+import { PlusCircleIcon } from '@heroicons/react/24/solid';
+import { routesname } from "../routes/routesname";
 
 export function OneAlbum() {
     const appState = useAppSelector(state => state.app);
+    const userState = useAppSelector(state => state.user);
     const jwt = useAppSelector(state => state.user.jwt);
     const [search] = useSearchParams();
     const idsearch = Number(search.get('id'));
@@ -20,6 +23,7 @@ export function OneAlbum() {
     return (
         <>
             <div className="oneartist_info">
+                {userState.isAdmin && <Link to={`${routesname.adminsongs}?id=${appState.oneAlbum.id}`} className="area_add_icon"><PlusCircleIcon className="add_icon"/></Link>}
                 <div className="shadow" style={{ backgroundImage: `url(${appState.oneAlbum.urlImage})` }}></div>
                 <img src={appState.oneAlbum.urlImage} alt={appState.oneAlbum.title} />
                 <div className="area_info">

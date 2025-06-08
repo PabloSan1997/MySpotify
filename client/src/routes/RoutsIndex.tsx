@@ -12,6 +12,7 @@ import { OneCategory } from "../pages/OneCategory";
 import { OneArtist } from "../pages/OneArtist";
 import { OneAlbum } from "../pages/OneAlbum";
 import { AdminPage } from "../pages/AdminPage";
+import { SongFormAdmin } from "../pages/SongFormAdmin";
 
 const Routes = () => useRoutes([
     {
@@ -57,6 +58,10 @@ const Routes = () => useRoutes([
     {
         path:routesname.admin,
         element:<MainLayout><AdminPage/></MainLayout>
+    },
+    {
+        path:routesname.adminsongs,
+        element:<MainLayout><SongFormAdmin/></MainLayout>
     }
 ]);
 

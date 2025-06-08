@@ -194,19 +194,44 @@ export const findOneSongExtraReducer = createAsyncThunk(
 
 export const createDataExtraReducer = createAsyncThunk(
     'extrareducer/createcategory',
-    async ({jwt, formdata, option}:{jwt:string, formdata:FormData, option:string}):Promise<void>=>{
-         const ft = await fetch(`${urlbase}/${option}`, {
+    async ({ jwt, formdata, option }: { jwt: string, formdata: FormData, option: string }): Promise<void> => {
+        const ft = await fetch(`${urlbase}/${option}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${jwt}`
             },
-            body:formdata
+            body: formdata
         });
 
         if (!ft.ok) throw { message: 'Problemas con la lista de canciones' };
         return ft.json();
     }
-); 
+);
+
+export const findArtistAndCategoryListExtraReducer = createAsyncThunk(
+    'extrareducer/artistAndCategory',
+    async ({ jwt }: { jwt: string }): Promise<{ artistas: Artist[], categories: Category[] }> => {
+        const ft = await fetch(`${urlbase}/artist`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${jwt}`
+            }
+        });
+        if (!ft.ok) throw { message: 'Problemas con la lista de artistas' };
+
+        const ft2 = await fetch(`${urlbase}/category`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${jwt}`
+            }
+        });
+        if (!ft2.ok) throw { message: 'Problemas con la lista de categorias' };
+        return {
+            artistas: await ft.json(),
+            categories: await ft2.json()
+        }
+    }
+);
 
 export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp>) {
     builder.addCase(findListCategoryExtraReducer.fulfilled, (state, action) => {
@@ -253,9 +278,13 @@ export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp
     builder.addCase(findOneSongExtraReducer.fulfilled, (state, action) => {
         state.onesong = action.payload;
     });
-    builder.addCase(createDataExtraReducer.fulfilled, ()=>{
+    builder.addCase(createDataExtraReducer.fulfilled, () => {
         window.location.reload();
     });
+    builder.addCase(findArtistAndCategoryListExtraReducer.fulfilled, (state, action)=>{
+        state.artists = action.payload.artistas;
+        state.category = action.payload.categories;
+    })
 }
 
 function restartApp(state: InitialStateApp) {

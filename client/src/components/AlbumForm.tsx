@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { createDataExtraReducer, findCategoriesExtraReducer } from "../slices/extraReducers/appExtraReducer";
+import { createDataExtraReducer,  findArtistAndCategoryListExtraReducer } from "../slices/extraReducers/appExtraReducer";
 import { useAppDispatch, useAppSelector } from "../hooks";
 
 export function SongForm() {
@@ -18,16 +18,29 @@ export function SongForm() {
     if (!categories.includes(id))
       setCategories(d => [...d, id]);
   }
-  const deleteCategory=(id:number):void=>{
-    const cats = categories.filter(p=> p !== id);
+  const addArtist = (id: number) => {
+    if (!artistas.includes(id))
+      setArtistas(d => [...d, id]);
+  }
+
+  const deleteCategory = (id: number): void => {
+    const cats = categories.filter(p => p !== id);
     setCategories(cats)
   }
-  const getCategory = (id:number):string =>{
-    const cat = appState.category.find(p=>p.id == id);
-    return cat?cat.title:'';
+  const deleteArtist = (id: number): void => {
+    const cats = artistas.filter(p => p !== id);
+    setArtistas(cats)
+  }
+  const getCategory = (id: number): string => {
+    const cat = appState.category.find(p => p.id == id);
+    return cat ? cat.title : '';
+  }
+   const getArtist = (id: number): string => {
+    const cat = appState.artists.find(p => p.id == id);
+    return cat ? cat.name : '';
   }
   React.useEffect(() => {
-    dispatch(findCategoriesExtraReducer({ jwt }));
+    dispatch(findArtistAndCategoryListExtraReducer({ jwt }));
   }, []);
   React.useEffect(() => {
     if (picture != null) {
@@ -45,21 +58,31 @@ export function SongForm() {
     <>
       <form className="form_admin category" onSubmit={e => {
         e.preventDefault();
-        if (title.trim() && picture) {
+        if (title.trim() && picture && artistas.length >0 && categories.length > 0) {
           const formdata = new FormData();
           formdata.append('title', title);
           formdata.append('image', picture);
+          formdata.append("categorylist", JSON.stringify(categories));
+          formdata.append("artistlist", JSON.stringify(artistas));
           dispatch(createDataExtraReducer({ jwt, formdata: formdata, option: 'album' }));
         }
       }}>
         <h2>Agregar Nuevo Album</h2>
         <label htmlFor="titlealb">Title</label>
         <input type="text" placeholder="Escribir..." id="titlealb" value={title} onChange={e => setTitle(e.target.value)} />
+
         <label htmlFor="categoriasalbum">Categorias</label>
-        <select name="" id="" onChange={e => addCategory(Number(e.target.value))}>
+        <select name="" id="categoriasalbum" onChange={e => addCategory(Number(e.target.value))}>
           {appState.category.map(p => <option value={p.id}>{p.title}</option>)}
         </select>
-        <p className="listcategories">{categories.map(p => <span onClick={()=>deleteCategory(p)} key={p}>{getCategory(p)}</span>)}</p>
+        <p className="listcategories">{categories.map(p => <span onClick={() => deleteCategory(p)} key={p}>{getCategory(p)}</span>)}</p>
+
+        <label htmlFor="artistlist">Artistas</label>
+        <select name="" id="artistlist" onChange={e => addArtist(Number(e.target.value))}>
+          {appState.artists.map(p => <option value={p.id}>{p.name}</option>)}
+        </select>
+        <p className="listcategories">{artistas.map(p => <span onClick={() => deleteArtist(p)} key={p}>{getArtist(p)}</span>)}</p>
+
         <label htmlFor="imagealb" className="add_file">Agregar imagen</label>
         <input
           type="file"

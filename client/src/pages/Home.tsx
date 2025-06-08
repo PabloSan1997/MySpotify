@@ -13,6 +13,7 @@ export function Home() {
     dispatch(findListCategoryExtraReducer({ jwt: userstate.jwt }));
   }, [userstate.jwt]);
 
+
   return (
     <>
       <h2 className="title">Home</h2>
