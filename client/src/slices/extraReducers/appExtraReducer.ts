@@ -1,5 +1,6 @@
 import { createAsyncThunk, type ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { urlbase } from "./userExtraReducer";
+import { routesname } from "../../routes/routesname";
 
 export const initialStateApp: InitialStateApp = {
     songs: [],
@@ -208,6 +209,24 @@ export const createDataExtraReducer = createAsyncThunk(
     }
 );
 
+export const createSongsExtraReducer = createAsyncThunk(
+    'extrareducer/createsongs',
+    async ({ id, data, jwt }: { id: number, data: FormData[], jwt: string }): Promise<{ id: number }> => {
+        const urlbsesong = `${urlbase}/album/song/${id}`
+        await Promise.all(data.map(async p => {
+            const ft = await fetch(urlbsesong, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${jwt}`
+                },
+                body: p
+            });
+            if (!ft.ok) throw { message: 'Problemas con la lista de canciones' };
+        }))
+        return { id };
+    }
+);
+
 export const findArtistAndCategoryListExtraReducer = createAsyncThunk(
     'extrareducer/artistAndCategory',
     async ({ jwt }: { jwt: string }): Promise<{ artistas: Artist[], categories: Category[] }> => {
@@ -281,10 +300,13 @@ export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp
     builder.addCase(createDataExtraReducer.fulfilled, () => {
         window.location.reload();
     });
-    builder.addCase(findArtistAndCategoryListExtraReducer.fulfilled, (state, action)=>{
+    builder.addCase(findArtistAndCategoryListExtraReducer.fulfilled, (state, action) => {
         state.artists = action.payload.artistas;
         state.category = action.payload.categories;
-    })
+    });
+    builder.addCase(createSongsExtraReducer.fulfilled, (_state, action) => {
+        window.location.href = `${routesname.onealbum}?=${action.payload.id}`;
+    });
 }
 
 function restartApp(state: InitialStateApp) {

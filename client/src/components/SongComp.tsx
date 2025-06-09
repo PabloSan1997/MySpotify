@@ -2,6 +2,7 @@
 import React, { useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { findOneSongExtraReducer } from "../slices/extraReducers/appExtraReducer";
+import { secondsToMinutes } from "../utils/secondsToMinutes";
 
 
 export function SongComp({ title, urlAudio, urlImage, album, id }: Song) {
@@ -31,7 +32,7 @@ export function SongComp({ title, urlAudio, urlImage, album, id }: Song) {
             {album.artists.map(p=> <span key={p.id}>{p.name}</span>)}
         </div>
         <div className="column column_duration">
-            <span>{min}</span>
+            <span>{secondsToMinutes(Number(min))}</span>
         </div>
        </div>
     );

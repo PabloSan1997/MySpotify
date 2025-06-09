@@ -70,19 +70,5 @@
             width: 5rem;
             margin: auto;
         }
-
-        button {
-            margin: 1rem auto;
-            padding: 10px 40px;
-            border: 2px solid white;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            background: none;
-            color: white;
-            &:hover {
-                background: rgba(255, 255, 255, 0.103);
-            }
-        }
     }
 }

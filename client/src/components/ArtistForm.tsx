@@ -47,7 +47,7 @@ export function ArtistForm() {
           }}
         />
         {preview.trim() && <img src={preview} alt='show image' />}
-        <button type="submit">Agregar</button>
+        <button type="submit" className="boton">Agregar</button>
       </form>
     );
 }

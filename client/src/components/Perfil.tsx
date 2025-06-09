@@ -57,7 +57,7 @@ export function Perfil() {
                     }}
                 />
                 {preview.trim() && <img className="preview_image" src={preview} alt="preview" />}
-                <button type="submit">Actualizar</button>
+                <button type="submit" className="boton">Actualizar</button>
             </form>
         </>
     );

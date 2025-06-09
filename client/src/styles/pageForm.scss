@@ -1,0 +1,67 @@
+@use 'colors.scss' as *;
+
+.album_info_cancionform {
+    width: 100%;
+    display: flex;
+    margin-top: 1rem;
+
+    img {
+        width: 5rem;
+    }
+
+    .area_info {
+        margin-left: 0.8rem;
+    }
+}
+
+
+.song_form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    .row_song {
+        h3{
+            font-size: 1rem;
+            margin-left: 0;
+            margin-bottom: 0.5rem;
+        }
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid $letra1;
+        input {
+            width: 50%;
+        }
+
+        input[type=file] {
+            display: none;
+        }
+
+        img{
+            max-width: 5rem;
+        }
+        p.res{
+            margin: 0;    
+            margin-bottom: 0.5rem;
+        }
+        label {
+            margin: 0.5rem 0;
+            width: fit-content;
+
+            &.like_button {
+                padding: 5px 10px;
+                border: 2px solid white;
+                border-radius: 10px;
+                cursor: pointer;
+                font-size: 0.8rem;
+                background: none;
+                color: white;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.103);
+                }
+            }
+        }
+    }
+}

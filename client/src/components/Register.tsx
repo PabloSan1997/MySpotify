@@ -37,7 +37,7 @@ export function RegisterForm() {
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Escribir..." />
             <label>Repite la contraseña</label>
             <input type="password" value={repeatPassord} onChange={e => setRepeatPassword(e.target.value)} placeholder="Escribir..." />
-            <button>Entrar</button>
+            <button className="boton">Entrar</button>
             {state.message.trim() && <p className="error">{state.message}</p>}
         </form>
     );

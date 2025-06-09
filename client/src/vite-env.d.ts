@@ -59,6 +59,13 @@ interface Song {
 	urlAudio: string;
 	album: Album;
 }
+
+interface NewSong{
+	title: string;
+	image:File|null;
+	audio:File|null;
+}
+
 interface CategoryList extends Category {
 	albums: {
 		id: number,

@@ -26,7 +26,7 @@ export function LoginForm() {
             <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Escribir..."/>
             <label>Contraseña</label>
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Escribir..."/>
-            <button>Entrar</button>
+            <button className="boton" type="submit">Entrar</button>
             {state.message.trim() && <p className="error">{state.message}</p>}
         </form>
     );

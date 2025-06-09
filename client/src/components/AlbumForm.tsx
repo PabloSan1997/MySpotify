@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-
 import React from "react";
 import { createDataExtraReducer,  findArtistAndCategoryListExtraReducer } from "../slices/extraReducers/appExtraReducer";
 import { useAppDispatch, useAppSelector } from "../hooks";
+
 
 export function SongForm() {
   const [title, setTitle] = React.useState('');
@@ -56,6 +56,7 @@ export function SongForm() {
   }, [picture]);
   return (
     <>
+    {}
       <form className="form_admin category" onSubmit={e => {
         e.preventDefault();
         if (title.trim() && picture && artistas.length >0 && categories.length > 0) {
@@ -97,7 +98,7 @@ export function SongForm() {
           }}
         />
         {preview.trim() && <img src={preview} alt='show image' />}
-        <button type="submit">Agregar</button>
+        <button type="submit" className="boton">Agregar</button>
       </form>
     </>
   );
