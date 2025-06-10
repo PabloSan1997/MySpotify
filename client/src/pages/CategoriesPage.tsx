@@ -19,7 +19,7 @@ export function CategoriesPage() {
     <>
       <h2 className="title">Categorias</h2>
       <div className="contenedor contenedor_list">
-        {appState.category.map(c => <CategoryCom key={c.id} {...c} pathbase={routesname.category}/>)}
+        {appState.category.map(c => <CategoryCom option={"category"} key={c.id} {...c} pathbase={routesname.category}/>)}
       </div>
     </>
   );

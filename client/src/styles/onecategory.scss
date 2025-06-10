@@ -17,6 +17,16 @@
         border-radius: 5px;
         cursor: pointer;
 
+        .delete_button {
+            position: absolute;
+            width: 2rem;
+            color: $fondo2;
+            right: 1rem;
+            &:hover{
+                color: $letra1;
+            }
+        }
+
         img {
             width: 5rem;
         }
@@ -52,15 +62,17 @@
     position: relative;
 
     .area_add_icon {
-           width: 3rem;
-            position: absolute;
-            right: 0.0rem;
-            top: 0.5rem;
+        width: 3rem;
+        position: absolute;
+        right: 0.0rem;
+        top: 0.5rem;
+
         .add_icon {
             color: white;
             opacity: 0.5;
             width: 100%;
             cursor: pointer;
+
             &:hover {
                 opacity: 1;
             }

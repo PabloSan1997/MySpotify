@@ -21,6 +21,7 @@ export function Artistas() {
             <div className="contenedor contenedor_list">
                 {appState.artists.map(c =>
                     <CategoryCom
+                    option={"artist"}
                         key={c.id}
                         id={c.id}
                         urlImage={c.urlImage}

@@ -85,3 +85,7 @@ interface InitialStateApp{
 	artists:Artist[];
 	oneArtist:Artist;
 }
+
+
+
+type OptionsApi = "category"|"album"|"artist"|"album/song"

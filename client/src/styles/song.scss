@@ -30,6 +30,18 @@ $width2:20%;
         border-radius: 5px;
         padding:8px 5px;
         box-sizing: border-box;
+        position: relative;
+          .delete_button {
+            position: absolute;
+            width: 2rem;
+            color: $fondo2;
+            right: 1rem;
+            top:0;
+            right: -0;
+            &:hover{
+                color: $letra1;
+            }
+        }
         &:hover{
             background: $fondohover;
             cursor: pointer;

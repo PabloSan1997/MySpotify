@@ -2,6 +2,7 @@ import { createAsyncThunk, type ActionReducerMapBuilder } from "@reduxjs/toolkit
 import { urlbase } from "./userExtraReducer";
 import { routesname } from "../../routes/routesname";
 
+
 export const initialStateApp: InitialStateApp = {
     songs: [],
     onesong: {
@@ -100,7 +101,7 @@ export const findOneCategory = createAsyncThunk(
                 'Authorization': `Bearer ${jwt}`
             }
         });
-        const ft3 = fetch(`${urlbase}/artist/album/${id}`, {
+        const ft3 = fetch(`${urlbase}/artist/category/${id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${jwt}`
@@ -191,6 +192,8 @@ export const findOneSongExtraReducer = createAsyncThunk(
     }
 );
 
+
+
 // ---------Admin extrareducers--------------------
 
 export const createDataExtraReducer = createAsyncThunk(
@@ -252,6 +255,21 @@ export const findArtistAndCategoryListExtraReducer = createAsyncThunk(
     }
 );
 
+
+export const deleteOneElementExtraReducer = createAsyncThunk(
+    'extrareducer/deleteOneElement',
+    async ({id, option, jwt}:{id:number, option:OptionsApi, jwt:string}):Promise<{id:number, option:OptionsApi}>=>{
+         const ft = await fetch(`${urlbase}/${option}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${jwt}`
+            }
+        });
+        if (!ft.ok) throw { message: 'Error para eliminar elemento' };
+        return {option, id}
+    }
+);
+
 export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp>) {
     builder.addCase(findListCategoryExtraReducer.fulfilled, (state, action) => {
         restartApp(state);
@@ -307,6 +325,9 @@ export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp
     builder.addCase(createSongsExtraReducer.fulfilled, (_state, action) => {
         window.location.href = `${routesname.onealbum}?=${action.payload.id}`;
     });
+    builder.addCase(deleteOneElementExtraReducer.fulfilled, ()=>{
+        window.location.href = `/#${routesname.home}`;
+    })
 }
 
 function restartApp(state: InitialStateApp) {

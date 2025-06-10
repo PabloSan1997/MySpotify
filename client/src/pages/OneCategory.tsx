@@ -39,6 +39,7 @@ export function OneCategory() {
             <h3 className="title3">Artista</h3>
             <div className="contenedor contenedor_list">
                 {appState.artists.map(c => (<CategoryCom
+                    option={"artist"}
                     key={c.id}
                     id={c.id}
                     urlImage={c.urlImage}
