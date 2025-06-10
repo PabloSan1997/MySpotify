@@ -104,6 +104,9 @@ public class SecurityConfig {
                         "/api/user/login",
                         "/api/user/register"
                 ).permitAll()
+                .requestMatchers(
+                        "/", "index.html", "/assets", "/assets/**", "myspotilogo.svg"
+                ).permitAll()
                 .anyRequest().authenticated();
     }
 
