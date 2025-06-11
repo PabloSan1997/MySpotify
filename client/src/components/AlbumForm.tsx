@@ -57,7 +57,7 @@ export function SongForm() {
   return (
     <>
     {}
-      <form className="form_admin category" onSubmit={e => {
+      <form className="form_admin form_album" onSubmit={e => {
         e.preventDefault();
         if (title.trim() && picture && artistas.length >0 && categories.length > 0) {
           const formdata = new FormData();

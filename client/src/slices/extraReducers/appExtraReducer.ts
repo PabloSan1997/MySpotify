@@ -270,6 +270,20 @@ export const deleteOneElementExtraReducer = createAsyncThunk(
     }
 );
 
+export const searchDataExtraReducer = createAsyncThunk(
+    'extrareducer/searchdata',
+    async ({jwt, title}:{jwt:string, title:string}):Promise<{albums:Album[], songs:Song[], artists:Artist[]}>=>{
+        const ft = await fetch(`${urlbase}/search/${title}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${jwt}`
+            }
+        });
+        if (!ft.ok) throw { message: 'Error para eliminar elemento' };
+        return ft.json();
+    }
+); 
+
 export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp>) {
     builder.addCase(findListCategoryExtraReducer.fulfilled, (state, action) => {
         restartApp(state);
@@ -327,7 +341,15 @@ export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp
     });
     builder.addCase(deleteOneElementExtraReducer.fulfilled, ()=>{
         window.location.href = `/#${routesname.home}`;
-    })
+    });
+
+    builder.addCase(searchDataExtraReducer.fulfilled, (state, action)=>{
+        restartApp(state);
+        const {artists, albums, songs} = action.payload;
+        state.albums = albums;
+        state.artists = artists;
+        state.songs = songs;
+    });
 }
 
 function restartApp(state: InitialStateApp) {

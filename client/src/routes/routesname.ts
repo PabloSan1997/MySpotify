@@ -11,5 +11,6 @@ export const routesname = {
     artists:'/artist',
     oneartist:'/oneartist',
     admin:'/admin',
-    adminsongs:'/admin/songs'
+    adminsongs:'/admin/songs',
+    search:'/search'
 }
