@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {useAppSelector } from "../hooks";
 import { YourOneSong } from "./YourOneSong";
 import '../styles/yoursong.scss';
@@ -6,8 +5,6 @@ import '../styles/yoursong.scss';
 
 export function YourSongs() {
     const appState = useAppSelector(state => state.app);
-
- 
 
     return (
         <>

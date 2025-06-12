@@ -1,5 +1,4 @@
 
-
 import React from "react";
 import { routesname } from "../routes/routesname";
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -7,6 +6,7 @@ import { viewuserinfoExtraReducer } from "../slices/extraReducers/userExtraReduc
 import '../styles/info.scss';
 import perfillogo from '../assets/perfil.svg';
 import { NavLink } from "react-router-dom";
+import { HomeIcon, MagnifyingGlassIcon, UserGroupIcon, UserCircleIcon, BriefcaseIcon, TagIcon } from '@heroicons/react/24/solid';
 
 export function IntroComponent() {
     const userstate = useAppSelector(state => state.user);
@@ -25,12 +25,12 @@ export function IntroComponent() {
             </div>
         </div>
         <nav>
-            <NavLink to={routesname.home}>Incio</NavLink>
-            <NavLink to={routesname.search}>Buscar</NavLink>
-            {userstate.isAdmin && <NavLink to={routesname.admin}>Admin</NavLink>}
-            <NavLink to={routesname.perfil}>Perfil</NavLink>
-            <NavLink to={routesname.artists}>Artistas</NavLink>
-            <NavLink to={routesname.categories}>Categorias</NavLink>
+            <NavLink to={routesname.home}><HomeIcon className="logo_icon"/> Incio</NavLink>
+            <NavLink to={routesname.search}><MagnifyingGlassIcon className="logo_icon"/> Buscar</NavLink>
+            {userstate.isAdmin && <NavLink to={routesname.admin}><BriefcaseIcon className="logo_icon"/> Admin</NavLink>}
+            <NavLink to={routesname.perfil}><UserCircleIcon className="logo_icon"/> Perfil</NavLink>
+            <NavLink to={routesname.artists}><UserGroupIcon className="logo_icon"/> Artistas</NavLink>
+            <NavLink to={routesname.categories}><TagIcon className="logo_icon"/> Categorias</NavLink>
         </nav>
     </div>
   );
