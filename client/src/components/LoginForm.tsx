@@ -23,9 +23,9 @@ export function LoginForm() {
         }}>
             <h2>Log in</h2>
             <label>Nombre de usuairo</label>
-            <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Escribir..."/>
+            <input type="text" className="input_general" value={username} onChange={e => setUsername(e.target.value)} placeholder="Escribir..."/>
             <label>Contraseña</label>
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Escribir..."/>
+            <input type="password" className="input_general" value={password} onChange={e => setPassword(e.target.value)} placeholder="Escribir..."/>
             <button className="boton" type="submit">Entrar</button>
             {state.message.trim() && <p className="error">{state.message}</p>}
         </form>

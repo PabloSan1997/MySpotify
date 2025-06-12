@@ -70,16 +70,18 @@ export function SongForm() {
       }}>
         <h2>Agregar Nuevo Album</h2>
         <label htmlFor="titlealb">Title</label>
-        <input type="text" placeholder="Escribir..." id="titlealb" value={title} onChange={e => setTitle(e.target.value)} />
+        <input type="text" className="input_general" placeholder="Escribir..." id="titlealb" value={title} onChange={e => setTitle(e.target.value)} />
 
         <label htmlFor="categoriasalbum">Categorias</label>
-        <select name="" id="categoriasalbum" onChange={e => addCategory(Number(e.target.value))}>
+        <select name="" defaultValue={""} id="categoriasalbum" className="input_general" onChange={e => addCategory(Number(e.target.value))}>
+           <option value="" disabled style={{display:'none'}}></option>
           {appState.category.map(p => <option value={p.id}>{p.title}</option>)}
         </select>
         <p className="listcategories">{categories.map(p => <span onClick={() => deleteCategory(p)} key={p}>{getCategory(p)}</span>)}</p>
 
         <label htmlFor="artistlist">Artistas</label>
-        <select name="" id="artistlist" onChange={e => addArtist(Number(e.target.value))}>
+        <select defaultValue={""} id="artistlist" className="input_general" onChange={e => addArtist(Number(e.target.value))}>
+          <option value="" disabled style={{display:'none'}}></option>
           {appState.artists.map(p => <option value={p.id}>{p.name}</option>)}
         </select>
         <p className="listcategories">{artistas.map(p => <span onClick={() => deleteArtist(p)} key={p}>{getArtist(p)}</span>)}</p>

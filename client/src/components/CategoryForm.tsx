@@ -33,7 +33,7 @@ export function CategoryForm() {
     }}>
       <h2>Agregar nueva categoria</h2>
       <label htmlFor="titlecat">Title</label>
-      <input type="text" placeholder="Escribir..." id="titlecat" value={title} onChange={e => setTitle(e.target.value)}/>
+      <input type="text" className="input_general" placeholder="Escribir..." id="titlecat" value={title} onChange={e => setTitle(e.target.value)}/>
       <label htmlFor="imagecat" className="add_file">Agregar imagen</label>
       <input
         type="file"

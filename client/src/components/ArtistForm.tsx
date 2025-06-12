@@ -32,7 +32,7 @@ export function ArtistForm() {
       }}>
         <h2>Agregar nuevo artista</h2>
         <label htmlFor="titlecat">Nombre</label>
-        <input type="text" placeholder="Escribir..." id="titlecat" value={title} onChange={e => setTitle(e.target.value)}/>
+        <input type="text" className="input_general" placeholder="Escribir..." id="titlecat" value={title} onChange={e => setTitle(e.target.value)}/>
         <label htmlFor="imagecat" className="add_file">Agregar imagen</label>
         <input
           type="file"

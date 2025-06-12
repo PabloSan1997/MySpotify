@@ -30,13 +30,13 @@ export function RegisterForm() {
         }}>
             <h2>Registrate</h2>
             <label>Nombre de usuario</label>
-            <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Escribir..." />
+            <input type="text" value={username} className="input_general" onChange={e => setUsername(e.target.value)} placeholder="Escribir..." />
             <label>Nickname</label>
-            <input type="text" value={nickname} onChange={e => setNikcname(e.target.value)} placeholder="Escribir..." />
+            <input type="text" value={nickname} className="input_general" onChange={e => setNikcname(e.target.value)} placeholder="Escribir..." />
             <label>Contraseña</label>
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Escribir..." />
+            <input type="password" value={password} className="input_general" onChange={e => setPassword(e.target.value)} placeholder="Escribir..." />
             <label>Repite la contraseña</label>
-            <input type="password" value={repeatPassord} onChange={e => setRepeatPassword(e.target.value)} placeholder="Escribir..." />
+            <input type="password" value={repeatPassord} className="input_general" onChange={e => setRepeatPassword(e.target.value)} placeholder="Escribir..." />
             <button className="boton">Entrar</button>
             {state.message.trim() && <p className="error">{state.message}</p>}
         </form>

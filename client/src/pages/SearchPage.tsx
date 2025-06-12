@@ -7,6 +7,7 @@ import { CategoryCom } from "../components/CategoryCom";
 import { routesname } from "../routes/routesname";
 import { searchDataExtraReducer } from "../slices/extraReducers/appExtraReducer";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import '../styles/search.scss';
 
 export function SearchPage() {
     const userstate = useAppSelector(state => state.user);
@@ -24,13 +25,15 @@ export function SearchPage() {
 
     return (
         <>
-            <form onSubmit={e => {
+            <form
+            className="form_search" 
+            onSubmit={e => {
                 e.preventDefault();
                 if(title.trim())
                     navigate(`${routesname.search}?view=${title}`);
             }}>
                 <input type="text" placeholder="Buscar..." value={title} onChange={e => setTitle(e.target.value)} />
-                <button type="submit">Buscar</button>
+                <button className="boton" type="submit">Buscar</button>
             </form>
             <h2 className="title">Canciones</h2>
             <div className="contenedor contenedor_songs">

@@ -1,0 +1,28 @@
+@use 'colors.scss' as *;
+
+.form_search{
+    width: 100%;
+    margin:01rem auto;
+    justify-content: center;
+    display: flex;
+    .boton{
+        margin: 0;
+        padding:0.2rem 0.4rem;
+        border-radius: 5px;
+        margin-left: 0.4rem;
+    }
+    input{
+        width: 90%;
+        padding: 5px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        border: 2px solid  $letra1;
+        background: black;
+        color: white;
+        outline:none;
+        font-size: 1rem;
+        &::placeholder{
+            color: $letra1;
+        }
+    }
+}
