@@ -1,0 +1,16 @@
+
+services:
+
+  myspotify:
+    build: .
+    restart: always
+    ports:
+      - 3007:3007
+    env_file: ./.env
+    environment:
+      - PORT=$PORT_ENV
+      - URL_DB=$URL_DB_ENV
+      - JWT_KEY=$JWT_KEY_ENV
+      - BUCKET_NAME=$BUCKET_NAME_ENV
+      - USERNAME=$USERNAME_ENV
+      - PASSWORD=$PASSWORD_ENV
