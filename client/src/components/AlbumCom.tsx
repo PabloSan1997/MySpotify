@@ -28,7 +28,7 @@ export function AlbumCom({ title, urlImage, artists, categories, id }: Album) {
                     {artists.map(a => <span key={a.id}>{a.name}</span>)}
                 </div>
                 <div className="categories">
-                    {categories.map(c => <span key={c.id}>{c.title}</span>)}
+                    {categories.map(c => <span key={c.id} onClick={()=> navigate(`${routesname.category}?id=${c.id}`)} >{c.title}</span>)}
                 </div>
             </div>
         </div>

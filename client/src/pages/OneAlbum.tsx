@@ -2,7 +2,7 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { findSongByAlbumExtraReducer } from "../slices/extraReducers/appExtraReducer";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { SongComp } from "../components/SongComp";
 import '../styles/song.scss';
 import { PlusCircleIcon } from '@heroicons/react/24/solid';
@@ -16,7 +16,7 @@ export function OneAlbum() {
     const idsearch = Number(search.get('id'));
     const id: number = isNaN(idsearch) ? 0 : idsearch;
     const dispatch = useAppDispatch();
-
+    const navigate = useNavigate();
     React.useEffect(() => {
         dispatch(findSongByAlbumExtraReducer({ jwt, id }));
     }, [jwt]);
@@ -28,8 +28,8 @@ export function OneAlbum() {
                 <img src={appState.oneAlbum.urlImage} alt={appState.oneAlbum.title} />
                 <div className="area_info">
                     <h2 className="title">{appState.oneAlbum.title}</h2>
-                    <h3>Artists: {appState.oneAlbum.artists.map(p => <span key={p.id}>{p.name}</span>)}</h3>
-                    <h3>Categorias: {appState.oneAlbum.categories.map(p => <span key={p.id}>{p.title}</span>)}</h3>
+                    <h3>Artists: {appState.oneAlbum.artists.map(p => <span onClick={()=>navigate(`${routesname.oneartist}?id=${p.id}`)} key={p.id}>{p.name}</span>)}</h3>
+                    <h3>Categorias: {appState.oneAlbum.categories.map(p => <span key={p.id} onClick={()=>navigate(`${routesname.category}?id=${p.id}`)} >{p.title}</span>)}</h3>
                 </div>
             </div>
             <h3 className="title2">Canciones</h3>
