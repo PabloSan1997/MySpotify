@@ -81,7 +81,9 @@ public class SecurityConfig {
                         "/api/artist",
                         "/api/artist/**",
                         "/api/album",
-                        "/api/album/**"
+                        "/api/album/**",
+                        "/api/search/**",
+                        "/api/search"
                 ).hasRole("USER")
                 .requestMatchers(
                         HttpMethod.POST,

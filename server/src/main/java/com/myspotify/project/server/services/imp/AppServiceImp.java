@@ -4,14 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myspotify.project.server.exceptions.MyBadRequestException;
 import com.myspotify.project.server.exceptions.MyFireBaseException;
 import com.myspotify.project.server.models.*;
-import com.myspotify.project.server.models.dtos.AlbumDto;
-import com.myspotify.project.server.models.dtos.CategoryList;
-import com.myspotify.project.server.models.dtos.FileDto;
-import com.myspotify.project.server.models.dtos.MainInfoDto;
+import com.myspotify.project.server.models.dtos.*;
 import com.myspotify.project.server.repositories.*;
 import com.myspotify.project.server.services.AlbumSongsService;
 import com.myspotify.project.server.services.ArtistService;
 import com.myspotify.project.server.services.CategoryService;
+import com.myspotify.project.server.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class AppServiceImp implements CategoryService, ArtistService, AlbumSongsService {
+public class AppServiceImp implements CategoryService, ArtistService, AlbumSongsService, SearchService {
     @Autowired
     private AlbumRepository albumRepository;
     @Autowired
@@ -282,5 +280,15 @@ public class AppServiceImp implements CategoryService, ArtistService, AlbumSongs
         }catch (Exception e){
             throw new MyFireBaseException(e.getMessage());
         }
+    }
+
+    @Override
+    @Transactional
+    public SearchDto searchData(String searchtext, Pageable pageable) {
+        var songs = songRepository.findBySearch(searchtext, pageable);
+        var albums = albumRepository.findBySearch(searchtext, pageable);
+        var artists = artistRepository.findBySearch(searchtext, pageable);
+
+        return SearchDto.builder().albums(albums).artists(artists).songs(songs).build();
     }
 }

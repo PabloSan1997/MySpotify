@@ -13,4 +13,7 @@ public interface ArtistRepository extends CrudRepository<Artist, Long> {
     List<Artist> findAllByIdAlbum(Long idAlbum, Pageable pageable);
     @Query("select a from Artist a join a.albums m join m.categories c where c.id = ?1")
     List<Artist> findAllByIdCategory(Long idCategory, Pageable pageable);
+
+    @Query("select a from Artist a where a.name ilike %?1%")
+    List<Artist> findBySearch(String name, Pageable pageable);
 }

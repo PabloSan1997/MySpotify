@@ -13,4 +13,7 @@ public interface SongRepository extends CrudRepository<Songs, Long> {
     @Query("select s from Songs s order by function('RANDOM')")
     List<Songs> findRandomSongs(Pageable pageable);
 
+    @Query("select a from Songs a where a.title ilike %?1%")
+    List<Songs> findBySearch(String title, Pageable pageable);
+
 }
