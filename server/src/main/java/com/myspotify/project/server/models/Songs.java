@@ -25,9 +25,6 @@ public class Songs {
     private String urlAudio;
     @Column(length = 200, unique = true)
     @JsonIgnore
-    private String imagefilename;
-    @Column(length = 200, unique = true)
-    @JsonIgnore
     private String audiofilename;
 
     @ManyToOne

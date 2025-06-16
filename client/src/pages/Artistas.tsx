@@ -15,6 +15,8 @@ export function Artistas() {
         dispatch(findArtistsExtraReducer({ jwt: userState.jwt }));
     }, [userState.jwt]);
 
+    if(appState.loading) return <div className="loading"></div>
+    
     return (
         <>
             <h2 className="title">Artistas</h2>

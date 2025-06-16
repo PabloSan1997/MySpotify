@@ -20,6 +20,8 @@ export function OneAlbum() {
     React.useEffect(() => {
         dispatch(findSongByAlbumExtraReducer({ jwt, id }));
     }, [jwt]);
+
+    if(appState.loading) return <div className="loading"></div>
     return (
         <>
             <div className="oneartist_info">

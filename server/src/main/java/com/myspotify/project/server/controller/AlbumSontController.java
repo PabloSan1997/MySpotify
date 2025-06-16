@@ -79,12 +79,11 @@ public class AlbumSontController {
 
     @PostMapping("/song/{idalbum}")
     public ResponseEntity<?> saveASong(
-            @RequestParam("image") MultipartFile imagefile,
             @RequestParam("title") String title,
             @RequestParam("audio") MultipartFile audiofile,
             @PathVariable("idalbum") Long idAlbum
     ) {
-        SongDto songDto = SongDto.builder().audiofile(audiofile).imagefile(imagefile).title(title).build();
+        SongDto songDto = SongDto.builder().audiofile(audiofile).title(title).build();
         return ResponseEntity.status(201).body(albumSongsService.saveSong(songDto, idAlbum));
     }
 }

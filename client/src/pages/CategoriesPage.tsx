@@ -15,6 +15,8 @@ export function CategoriesPage() {
     dispatch(findCategoriesExtraReducer({ jwt: userState.jwt }));
   }, [userState.jwt]);
 
+  if(appState.loading) return <div className="loading"></div>
+
   return (
     <>
       <h2 className="title">Categorias</h2>

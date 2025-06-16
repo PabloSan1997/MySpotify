@@ -13,6 +13,7 @@ export function Home() {
     dispatch(findListCategoryExtraReducer({ jwt: userstate.jwt }));
   }, [userstate.jwt]);
 
+  if(appstate.loading) return <div className="loading"></div>
 
   return (
     <>

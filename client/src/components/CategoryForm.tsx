@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { createDataExtraReducer } from "../slices/extraReducers/appExtraReducer";
+import { appActions } from "../slices/appSlice";
 
 
 export function CategoryForm() {
@@ -9,6 +11,8 @@ export function CategoryForm() {
   const [preview, setPreview] = React.useState('');
   const jwt = useAppSelector(state => state.user.jwt);
   const dispatch = useAppDispatch();
+  const appState = useAppSelector(state => state.app);
+
   React.useEffect(() => {
     if (picture != null) {
       const reader = new FileReader();
@@ -21,6 +25,12 @@ export function CategoryForm() {
       setPreview('');
     }
   }, [picture]);
+
+  React.useEffect(() => {
+    dispatch(appActions.writeMessage({ message: '' }))
+  }, []);
+
+  if (appState.loading) return <div className="loading"></div>
   return (
     <form className="form_admin category" onSubmit={e => {
       e.preventDefault();
@@ -28,12 +38,13 @@ export function CategoryForm() {
         const formdata = new FormData();
         formdata.append('title', title);
         formdata.append('image', picture);
-        dispatch(createDataExtraReducer({jwt, formdata:formdata, option:'category'}));
-      }
+        dispatch(createDataExtraReducer({ jwt, formdata: formdata, option: 'category' }));
+      } else
+        dispatch(appActions.writeMessage({ message: 'Falta campos por llenar' }));
     }}>
       <h2>Agregar nueva categoria</h2>
       <label htmlFor="titlecat">Title</label>
-      <input type="text" className="input_general" placeholder="Escribir..." id="titlecat" value={title} onChange={e => setTitle(e.target.value)}/>
+      <input type="text" className="input_general" placeholder="Escribir..." id="titlecat" value={title} onChange={e => setTitle(e.target.value)} />
       <label htmlFor="imagecat" className="add_file">Agregar imagen</label>
       <input
         type="file"
@@ -49,6 +60,7 @@ export function CategoryForm() {
       />
       {preview.trim() && <img src={preview} alt='show image' />}
       <button type="submit" className="boton">Agregar</button>
+      <p className="error">{appState.message}</p>
     </form>
   );
 }

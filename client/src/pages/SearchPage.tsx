@@ -20,48 +20,52 @@ export function SearchPage() {
     React.useEffect(() => {
         if (viewtitle && viewtitle.trim())
             dispatch(searchDataExtraReducer({ jwt: userstate.jwt, title: viewtitle }));
-        
+
     }, [viewtitle]);
+
+
 
     return (
         <>
             <form
-            className="form_search" 
-            onSubmit={e => {
-                e.preventDefault();
-                if(title.trim())
-                    navigate(`${routesname.search}?view=${title}`);
-            }}>
+                className="form_search"
+                onSubmit={e => {
+                    e.preventDefault();
+                    if (title.trim())
+                        navigate(`${routesname.search}?view=${title}`);
+                }}>
                 <input type="text" placeholder="Buscar..." value={title} onChange={e => setTitle(e.target.value)} />
                 <button className="boton" type="submit">Buscar</button>
             </form>
-            <h2 className="title">Canciones</h2>
-            <div className="contenedor contenedor_songs">
-                <div className="rawheader">
-                    <span className="col col1">Title</span>
-                    <span className="col col2">Artistas</span>
-                    <span className="col col3">Duracion</span>
+            {appstate.loading ? (<div className="loading"></div>) : (<>
+                <h2 className="title">Canciones</h2>
+                <div className="contenedor contenedor_songs">
+                    <div className="rawheader">
+                        <span className="col col1">Title</span>
+                        <span className="col col2">Artistas</span>
+                        <span className="col col3">Duracion</span>
+                    </div>
+                    {appstate.songs.map(p => <SongComp key={p.id} {...p} />)}
                 </div>
-                {appstate.songs.map(p => <SongComp key={p.id} {...p} />)}
-            </div>
-            <h2 className="title">Albums</h2>
-            <div className="contenedor contenedor_album">
-                {appstate.albums.map(s => <AlbumCom key={s.id} {...s} />)}
-            </div>
+                <h2 className="title">Albums</h2>
+                <div className="contenedor contenedor_album">
+                    {appstate.albums.map(s => <AlbumCom key={s.id} {...s} />)}
+                </div>
 
-            <h2 className="title">Artistas</h2>
-            <div className="contenedor contenedor_list">
-                {appstate.artists.map(c =>
-                    <CategoryCom
-                        option={"artist"}
-                        key={c.id}
-                        id={c.id}
-                        urlImage={c.urlImage}
-                        title={c.name}
-                        pathbase={routesname.oneartist}
-                    />
-                )}
-            </div>
+                <h2 className="title">Artistas</h2>
+                <div className="contenedor contenedor_list">
+                    {appstate.artists.map(c =>
+                        <CategoryCom
+                            option={"artist"}
+                            key={c.id}
+                            id={c.id}
+                            urlImage={c.urlImage}
+                            title={c.name}
+                            pathbase={routesname.oneartist}
+                        />
+                    )}
+                </div>
+                </>)}
         </>
     );
 }

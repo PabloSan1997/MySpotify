@@ -231,7 +231,6 @@ public class AppServiceImp implements CategoryService, ArtistService, AlbumSongs
     @Transactional
     public void deleteSong(Long id) {
         songRepository.findById(id).ifPresent(c -> {
-            fireBaseRepository.deleteFile(c.getImagefilename(), false);
             fireBaseRepository.deleteFile(c.getAudiofilename(), true);
             songRepository.deleteById(c.getId());
         });
@@ -271,9 +270,8 @@ public class AppServiceImp implements CategoryService, ArtistService, AlbumSongs
 
         try{
             FileDto fileDtoAudio = fireBaseRepository.saveFile(songDto.getAudiofile(), true);
-            FileDto fileDtoImage = fireBaseRepository.saveFile(songDto.getImagefile(), false);
             Songs songs = Songs.builder().title(songDto.getTitle()).album(album)
-                    .urlImage(fileDtoImage.getUrlfile()).imagefilename(fileDtoImage.getIdfirebase())
+                    .urlImage(album.getUrlImage())
                     .audiofilename(fileDtoAudio.getIdfirebase()).urlAudio(fileDtoAudio.getUrlfile())
                     .build();
             return songRepository.save(songs);

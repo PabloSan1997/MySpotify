@@ -19,6 +19,8 @@ export function OneArtist() {
         dispatch(findOneArtistExtraReducer({ jwt: userState.jwt, id }));
     }, [userState.jwt]);
 
+    if(appState.loading) return <div className="loading"></div>
+
     return (
         <>
             <div className="oneartist_info">

@@ -36,7 +36,6 @@ table cancion{
   url_image varchar(800)
   url_audio varchar(800)
   id_album bigint
-  imagefilename varchar(200) [unique]
   audiofilename varchar(200) [unique]
 }
 table artista{

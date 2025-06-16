@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { appExtraReducer, initialStateApp } from "./extraReducers/appExtraReducer";
 
 
@@ -28,6 +28,9 @@ const appSlice = createSlice({
                 const backwardIndex = index == 0 ? totalSongs - 1 : index - 1;
                 state.onesong = state.songs[backwardIndex];
             }
+        },
+        writeMessage(state, action:PayloadAction<{message:string}>){
+            state.message = action.payload.message;
         }
     },
     extraReducers: appExtraReducer

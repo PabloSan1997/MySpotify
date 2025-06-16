@@ -13,6 +13,5 @@ import org.springframework.web.multipart.MultipartFile;
 @Builder
 public class SongDto {
     private String title;
-    private MultipartFile imagefile;
     private MultipartFile audiofile;
 }

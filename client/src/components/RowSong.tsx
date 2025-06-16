@@ -1,27 +1,13 @@
-import React from "react";
 
 
 interface NewSongCompnent extends NewSong {
     index: number;
     onChangeText(text: string): void
     onChangeAudio(data: FileList | null): void
-    onChangeImage(data: FileList | null): void
 }
-export function RowSong({ title, image, audio, onChangeText, onChangeImage, onChangeAudio, index }: NewSongCompnent) {
-    const [picture, setPicture] = React.useState('');
+export function RowSong({ title, audio, onChangeText, onChangeAudio, index }: NewSongCompnent) {
 
-    React.useEffect(() => {
-        if (image != null) {
-            const reader = new FileReader();
-            reader.onload = e => {
-                const u = e.target?.result ? e.target.result : '';
-                setPicture(u.toString());
-            }
-            reader.readAsDataURL(image);
-        } else {
-            setPicture('');
-        }
-    }, [image]);
+
 
     return (
         <div className="row_song">
@@ -35,14 +21,6 @@ export function RowSong({ title, image, audio, onChangeText, onChangeImage, onCh
                 onChange={e => onChangeAudio(e.target.files)}
             />
             <p className="res">{audio?.name}</p>
-            <label htmlFor={'image' + index} className="like_button ">Portada</label>
-            <input
-                type="file"
-                id={'image' + index}
-                accept="image/*"
-                onChange={e => onChangeImage(e.target.files)}
-            />
-            {picture && <img src={picture} alt={image?.name} />}
         </div>
     );
 }

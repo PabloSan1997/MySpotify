@@ -24,6 +24,8 @@ export function OneCategory() {
     if (id === 0)
         return <Navigate to={routesname.home} />
 
+     if(appState.loading) return <div className="loading"></div>
+
     return (
         <>
             <div className="oneartist_info">

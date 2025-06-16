@@ -6,6 +6,7 @@ import { createSongsExtraReducer, findSongByAlbumExtraReducer } from "../slices/
 import '../styles/pageForm.scss';
 import { RowSong } from "../components/RowSong";
 import { viewInformation } from "../utils/viewInformation";
+import { appActions } from "../slices/appSlice";
 
 export function SongFormAdmin() {
     const appState = useAppSelector(state => state.app);
@@ -16,17 +17,14 @@ export function SongFormAdmin() {
     const dispatch = useAppDispatch();
     const [songs, setSongs] = React.useState<NewSong[]>([
         {
-            image: null,
             audio: null,
             title: ''
         }
     ]);
 
-    console.table(songs);
 
     const addNumberSongsSong = () => {
         setSongs(s => [...s, {
-            image: null,
             audio: null,
             title: ''
         }])
@@ -46,8 +44,10 @@ export function SongFormAdmin() {
     React.useEffect(() => {
         if (appState.oneAlbum.id == 0 || appState.oneAlbum.id !== id)
             dispatch(findSongByAlbumExtraReducer({ jwt: userState.jwt, id }));
+        dispatch(appActions.writeMessage({ message: '' }));
     }, []);
 
+    if (appState.loading) return <div className="loading"></div>
 
     return (
         <>
@@ -61,16 +61,16 @@ export function SongFormAdmin() {
             </div>
             <form className="song_form" onSubmit={e => {
                 e.preventDefault();
-                if(viewInformation(songs)){
-                    const formdatas:FormData[] = songs.map(({title, audio, image})=>{
+                if (viewInformation(songs)) {
+                    const formdatas: FormData[] = songs.map(({ title, audio }) => {
                         const formdata = new FormData();
                         formdata.append('title', title);
-                        formdata.append('image', image as File);
                         formdata.append('audio', audio as File);
                         return formdata;
                     })
-                    dispatch(createSongsExtraReducer({jwt:userState.jwt, data: formdatas, id}));
-                }
+                    dispatch(createSongsExtraReducer({ jwt: userState.jwt, data: formdatas, id }));
+                } else
+                    dispatch(appActions.writeMessage({ message: 'Llene todos los campos' }))
             }}>
                 {songs.map((s, i) => <RowSong
                     key={i}
@@ -91,15 +91,6 @@ export function SongFormAdmin() {
 
                         }
                     }}
-                    onChangeImage={(a) => {
-                        if (a && a[0]) {
-                            setSongs(d => {
-                                d[i].image = a[0];
-                                return [...d];
-                            })
-
-                        }
-                    }}
                 />)}
 
                 <div className="area_add_rest">
@@ -107,6 +98,7 @@ export function SongFormAdmin() {
                     <button type="button" className="boton" onClick={restartNumberSongsSong}>-</button>
                 </div>
                 <button type="submit" className="boton">Agregar</button>
+                <p className="error">{appState.message}</p>
             </form>
         </>
     );

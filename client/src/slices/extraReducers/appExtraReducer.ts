@@ -38,7 +38,9 @@ export const initialStateApp: InitialStateApp = {
         id: 0,
         name: "",
         urlImage: ""
-    }
+    },
+    message: "",
+    loading: false
 }
 
 
@@ -258,21 +260,21 @@ export const findArtistAndCategoryListExtraReducer = createAsyncThunk(
 
 export const deleteOneElementExtraReducer = createAsyncThunk(
     'extrareducer/deleteOneElement',
-    async ({id, option, jwt}:{id:number, option:OptionsApi, jwt:string}):Promise<{id:number, option:OptionsApi}>=>{
-         const ft = await fetch(`${urlbase}/${option}/${id}`, {
+    async ({ id, option, jwt }: { id: number, option: OptionsApi, jwt: string }): Promise<{ id: number, option: OptionsApi }> => {
+        const ft = await fetch(`${urlbase}/${option}/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${jwt}`
             }
         });
         if (!ft.ok) throw { message: 'Error para eliminar elemento' };
-        return {option, id}
+        return { option, id }
     }
 );
 
 export const searchDataExtraReducer = createAsyncThunk(
     'extrareducer/searchdata',
-    async ({jwt, title}:{jwt:string, title:string}):Promise<{albums:Album[], songs:Song[], artists:Artist[]}>=>{
+    async ({ jwt, title }: { jwt: string, title: string }): Promise<{ albums: Album[], songs: Song[], artists: Artist[] }> => {
         const ft = await fetch(`${urlbase}/search/${title}`, {
             method: 'GET',
             headers: {
@@ -282,23 +284,50 @@ export const searchDataExtraReducer = createAsyncThunk(
         if (!ft.ok) throw { message: 'Error para eliminar elemento' };
         return ft.json();
     }
-); 
+);
 
 export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp>) {
+    builder.addCase(findListCategoryExtraReducer.pending, (state) => {
+        state.loading = true;
+    });
     builder.addCase(findListCategoryExtraReducer.fulfilled, (state, action) => {
         restartApp(state);
 
         state.categoryList = action.payload;
+    });
+    builder.addCase(findListCategoryExtraReducer.rejected, (state) => {
+        restartApp(state);
+    });
+
+
+    builder.addCase(findCategoriesExtraReducer.pending, (state) => {
+        state.loading = true;
     });
     builder.addCase(findCategoriesExtraReducer.fulfilled, (state, action) => {
         restartApp(state);
 
         state.category = action.payload;
     });
+    builder.addCase(findCategoriesExtraReducer.rejected, (state) => {
+        restartApp(state);
+    });
+
+
+    builder.addCase(findArtistsExtraReducer.pending, (state) => {
+        state.loading = true;
+    });
     builder.addCase(findArtistsExtraReducer.fulfilled, (state, action) => {
         restartApp(state);
 
         state.artists = action.payload;
+    });
+    builder.addCase(findArtistsExtraReducer.rejected, (state) => {
+        restartApp(state);
+    });
+
+
+    builder.addCase(findOneCategory.pending, (state) => {
+        state.loading = true;
     });
     builder.addCase(findOneCategory.fulfilled, (state, action) => {
         restartApp(state);
@@ -308,13 +337,28 @@ export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp
         state.oneCategory = action.payload.category;
         state.artists = action.payload.artists;
     });
+    builder.addCase(findOneCategory.rejected, (state) => {
+        restartApp(state);
+    });
 
+
+    builder.addCase(findOneArtistExtraReducer.pending, (state) => {
+        state.loading = true;
+    });
     builder.addCase(findOneArtistExtraReducer.fulfilled, (state, action) => {
         restartApp(state);
 
 
         state.albums = action.payload.albums;
         state.oneArtist = action.payload.artist;
+    });
+    builder.addCase(findOneArtistExtraReducer.rejected, (state) => {
+        restartApp(state);
+    });
+
+
+    builder.addCase(findSongByAlbumExtraReducer.pending, (state) => {
+      state.loading = true;
     });
     builder.addCase(findSongByAlbumExtraReducer.fulfilled, (state, action) => {
         restartApp(state);
@@ -323,33 +367,73 @@ export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp
         state.songs = action.payload.song;
         state.oneAlbum = action.payload.album;
     });
+    builder.addCase(findSongByAlbumExtraReducer.rejected, (state) => {
+        restartApp(state);
+    });
+
+
     builder.addCase(findSongsExtraReducer.fulfilled, (state, action) => {
         state.songs = action.payload;
     });
+
+
     builder.addCase(findOneSongExtraReducer.fulfilled, (state, action) => {
         state.onesong = action.payload;
     });
-    builder.addCase(createDataExtraReducer.fulfilled, () => {
+
+
+    builder.addCase(createDataExtraReducer.pending, (state) => {
+        state.loading = true;
+    });
+    builder.addCase(createDataExtraReducer.fulfilled, (state) => {
+        state.loading = false;
         window.location.reload();
     });
+     builder.addCase(createDataExtraReducer.rejected, (state, action) => {
+        state.loading = false;
+        state.message = action.error.message ?? 'Error al agregar datos'
+    });
+
+
     builder.addCase(findArtistAndCategoryListExtraReducer.fulfilled, (state, action) => {
         state.artists = action.payload.artistas;
         state.category = action.payload.categories;
     });
-    builder.addCase(createSongsExtraReducer.fulfilled, (_state, action) => {
-        window.location.href = `${routesname.onealbum}?=${action.payload.id}`;
+
+
+    builder.addCase(createSongsExtraReducer.fulfilled, (state, action) => {
+        state.loading = false;
+        window.location.href = `${routesname.onealbum}?id=${action.payload.id}`;
+    }); 
+    builder.addCase(createSongsExtraReducer.pending, (state) => {
+        state.loading = true;
     });
-    builder.addCase(deleteOneElementExtraReducer.fulfilled, ()=>{
+    builder.addCase(createSongsExtraReducer.rejected, (state, action) => {
+       state.loading = false;
+       state.message = action.error.message ?? 'Error al agregar canciones';
+    });
+
+
+    builder.addCase(deleteOneElementExtraReducer.fulfilled, () => {
         window.location.href = `/#${routesname.home}`;
     });
 
-    builder.addCase(searchDataExtraReducer.fulfilled, (state, action)=>{
+
+    builder.addCase(searchDataExtraReducer.pending, (state) => {
+       state.loading = true;
+    });
+    builder.addCase(searchDataExtraReducer.fulfilled, (state, action) => {
         restartApp(state);
-        const {artists, albums, songs} = action.payload;
+        const { artists, albums, songs } = action.payload;
         state.albums = albums;
         state.artists = artists;
         state.songs = songs;
+        state.loading = false;
     });
+    builder.addCase(searchDataExtraReducer.rejected, (state) => {
+       restartApp(state);
+    });
+
 }
 
 function restartApp(state: InitialStateApp) {
@@ -359,4 +443,5 @@ function restartApp(state: InitialStateApp) {
     state.categoryList = initialStateApp.categoryList;
     state.oneAlbum = initialStateApp.oneAlbum;
     state.oneArtist = initialStateApp.oneArtist;
+    state.loading = false;
 }

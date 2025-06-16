@@ -38,8 +38,27 @@ div {
     font-size: 0.8rem;
     background: none;
     color: white;
-
     &:hover {
         background: rgba(255, 255, 255, 0.103);
+    }
+}
+
+.loading{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 100%;
+    border: 5px solid $fondo2;
+    border-top-color: white;
+    margin:5rem auto;
+    filter: drop-shadow(0 0 10px rgb(63, 63, 63));
+    animation: theturn infinite 1s linear;
+}
+
+@keyframes  theturn{
+    from{
+        rotate: 0deg;
+    }
+    to{
+        rotate: 360deg;
     }
 }

@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { createDataExtraReducer } from "../slices/extraReducers/appExtraReducer";
 import { useAppDispatch, useAppSelector } from "../hooks";
+import { appActions } from "../slices/appSlice";
 
 export function ArtistForm() {
   const [title, setTitle] = React.useState('');
@@ -8,6 +10,8 @@ export function ArtistForm() {
     const [preview, setPreview] = React.useState('');
     const jwt = useAppSelector(state => state.user.jwt);
     const dispatch = useAppDispatch();
+    const appState = useAppSelector(state => state.app);
+
     React.useEffect(() => {
       if (picture != null) {
         const reader = new FileReader();
@@ -20,6 +24,13 @@ export function ArtistForm() {
         setPreview('');
       }
     }, [picture]);
+
+    React.useEffect(()=>{
+      dispatch(appActions.writeMessage({message:''}));
+    },[]);
+
+     if(appState.loading) return <div className="loading"></div>;
+
     return (
       <form className="form_admin category" onSubmit={e => {
         e.preventDefault();
@@ -28,6 +39,8 @@ export function ArtistForm() {
           formdata.append('name', title);
           formdata.append('image', picture);
           dispatch(createDataExtraReducer({jwt, formdata:formdata, option:'artist'}));
+        }else{
+          dispatch(appActions.writeMessage({message:'Faltan campos por llenar'}));
         }
       }}>
         <h2>Agregar nuevo artista</h2>
@@ -48,6 +61,7 @@ export function ArtistForm() {
         />
         {preview.trim() && <img src={preview} alt='show image' />}
         <button type="submit" className="boton">Agregar</button>
+        <p className="error">{appState.message}</p>
       </form>
     );
 }

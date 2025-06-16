@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React from "react";
-import { createDataExtraReducer,  findArtistAndCategoryListExtraReducer } from "../slices/extraReducers/appExtraReducer";
+import { createDataExtraReducer, findArtistAndCategoryListExtraReducer } from "../slices/extraReducers/appExtraReducer";
 import { useAppDispatch, useAppSelector } from "../hooks";
+import { appActions } from "../slices/appSlice";
 
 
 export function SongForm() {
@@ -35,12 +36,14 @@ export function SongForm() {
     const cat = appState.category.find(p => p.id == id);
     return cat ? cat.title : '';
   }
-   const getArtist = (id: number): string => {
+  const getArtist = (id: number): string => {
     const cat = appState.artists.find(p => p.id == id);
     return cat ? cat.name : '';
   }
   React.useEffect(() => {
-    dispatch(findArtistAndCategoryListExtraReducer({ jwt }));
+    dispatch(findArtistAndCategoryListExtraReducer({ jwt })).then(() => {
+      dispatch(appActions.writeMessage({ message: '' }));
+    });
   }, []);
   React.useEffect(() => {
     if (picture != null) {
@@ -54,19 +57,23 @@ export function SongForm() {
       setPreview('');
     }
   }, [picture]);
+
+  if (appState.loading) return <div className="loading"></div>
+
   return (
     <>
-    {}
+
       <form className="form_admin form_album" onSubmit={e => {
         e.preventDefault();
-        if (title.trim() && picture && artistas.length >0 && categories.length > 0) {
+        if (title.trim() && picture && artistas.length > 0 && categories.length > 0) {
           const formdata = new FormData();
           formdata.append('title', title);
           formdata.append('image', picture);
           formdata.append("categorylist", JSON.stringify(categories));
           formdata.append("artistlist", JSON.stringify(artistas));
           dispatch(createDataExtraReducer({ jwt, formdata: formdata, option: 'album' }));
-        }
+        } else
+          dispatch(appActions.writeMessage({ message: 'Faltan campos por llenar' }));
       }}>
         <h2>Agregar Nuevo Album</h2>
         <label htmlFor="titlealb">Title</label>
@@ -74,14 +81,14 @@ export function SongForm() {
 
         <label htmlFor="categoriasalbum">Categorias</label>
         <select name="" defaultValue={""} id="categoriasalbum" className="input_general" onChange={e => addCategory(Number(e.target.value))}>
-           <option value="" disabled style={{display:'none'}}></option>
+          <option value="" disabled style={{ display: 'none' }}></option>
           {appState.category.map(p => <option value={p.id}>{p.title}</option>)}
         </select>
         <p className="listcategories">{categories.map(p => <span onClick={() => deleteCategory(p)} key={p}>{getCategory(p)}</span>)}</p>
 
         <label htmlFor="artistlist">Artistas</label>
         <select defaultValue={""} id="artistlist" className="input_general" onChange={e => addArtist(Number(e.target.value))}>
-          <option value="" disabled style={{display:'none'}}></option>
+          <option value="" disabled style={{ display: 'none' }}></option>
           {appState.artists.map(p => <option value={p.id}>{p.name}</option>)}
         </select>
         <p className="listcategories">{artistas.map(p => <span onClick={() => deleteArtist(p)} key={p}>{getArtist(p)}</span>)}</p>
@@ -101,6 +108,7 @@ export function SongForm() {
         />
         {preview.trim() && <img src={preview} alt='show image' />}
         <button type="submit" className="boton">Agregar</button>
+        <p className="error">{appState.message}</p>
       </form>
     </>
   );

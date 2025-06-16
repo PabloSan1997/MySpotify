@@ -62,7 +62,6 @@ interface Song {
 
 interface NewSong{
 	title: string;
-	image:File|null;
 	audio:File|null;
 }
 
@@ -84,6 +83,8 @@ interface InitialStateApp{
 	oneAlbum:Album;
 	artists:Artist[];
 	oneArtist:Artist;
+	message:string;
+	loading:boolean;
 }
 
 
