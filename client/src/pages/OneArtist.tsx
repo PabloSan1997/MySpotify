@@ -17,7 +17,7 @@ export function OneArtist() {
 
     React.useEffect(() => {
         dispatch(findOneArtistExtraReducer({ jwt: userState.jwt, id }));
-    }, [userState.jwt]);
+    }, [userState.jwt, id]);
 
     if(appState.loading) return <div className="loading"></div>
 

@@ -19,7 +19,7 @@ export function OneAlbum() {
     const navigate = useNavigate();
     React.useEffect(() => {
         dispatch(findSongByAlbumExtraReducer({ jwt, id }));
-    }, [jwt]);
+    }, [jwt, id]);
 
     if(appState.loading) return <div className="loading"></div>
     return (

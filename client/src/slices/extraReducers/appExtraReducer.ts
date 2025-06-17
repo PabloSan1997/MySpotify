@@ -403,7 +403,7 @@ export function appExtraReducer(builder: ActionReducerMapBuilder<InitialStateApp
 
     builder.addCase(createSongsExtraReducer.fulfilled, (state, action) => {
         state.loading = false;
-        window.location.href = `${routesname.onealbum}?id=${action.payload.id}`;
+        window.location.href = `/#${routesname.onealbum}?id=${action.payload.id}`;
     }); 
     builder.addCase(createSongsExtraReducer.pending, (state) => {
         state.loading = true;

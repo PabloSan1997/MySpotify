@@ -20,7 +20,7 @@ export function OneCategory() {
 
     React.useEffect(() => {
         dispatch(findOneCategory({ jwt: userState.jwt, id }));
-    }, [userState.jwt]);
+    }, [userState.jwt, id]);
     if (id === 0)
         return <Navigate to={routesname.home} />
 
