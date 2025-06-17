@@ -1,7 +1,7 @@
 # MySpotify
 
+## Sections
 
+- Client part: [Click here](./client/ "Client part")
 
-## Diagram
-
-[![Diagrama](./diagrams/schema.png "Diagrama")](./diagrams/schema.png "Diagrama")
+- Service part: [Click here](./server/ "Server part")

@@ -24,18 +24,13 @@
 
 [![Album admin](../screenshots/admin_album.PNG "Album admin")](../screenshots/admin_album.PNG "Album admin")
 
-
 ### Admin: Create Songs
-
 
 #### Default form
 
-
 [![Song admin](../screenshots/admin_song.PNG "Song admin")](../screenshots/admin_song.PNG "Song admin")
 
-
 #### Form with some update songs
-
 
 [![Song2 admin](../screenshots/admin_song2.PNG "Song2 admin")](../screenshots/admin_song2.PNG "Song2 admin")
 
