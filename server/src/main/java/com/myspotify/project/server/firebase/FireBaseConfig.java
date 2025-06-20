@@ -22,24 +22,24 @@ public class FireBaseConfig {
 
     @Value("${bucket.name}")
     private String bucketname;
-    @Value("${ketjson.text}")
-    private String keyjson;
+//    @Value("${ketjson.text}")
+//    private String keyjson;
 
     @PostConstruct
     public void init() throws IOException {
 
-//        Resource resource = new ClassPathResource("keys/myspotify-key.json");
+        Resource resource = new ClassPathResource("keys/myspotify-key.json");
+
+        FirebaseOptions options =  FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.fromStream(resource.getInputStream()))
+                .setStorageBucket(bucketname)
+                .build();
+
+//        ByteArrayInputStream serviceAccountStream = new ByteArrayInputStream(keyjson.getBytes(StandardCharsets.UTF_8));
 //
-//        FirebaseOptions options =  FirebaseOptions.builder()
-//                .setCredentials(GoogleCredentials.fromStream(resource.getInputStream()))
-//                .setStorageBucket(bucketname)
-//                .build();
-
-        ByteArrayInputStream serviceAccountStream = new ByteArrayInputStream(keyjson.getBytes(StandardCharsets.UTF_8));
-
-        FirebaseOptions options = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccountStream))
-                .setStorageBucket(bucketname).build();
+//        FirebaseOptions options = FirebaseOptions.builder()
+//                .setCredentials(GoogleCredentials.fromStream(serviceAccountStream))
+//                .setStorageBucket(bucketname).build();
 
         FirebaseApp.initializeApp(options);
     }

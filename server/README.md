@@ -1,20 +1,77 @@
 # Service
 
+## Databse Schema
 
-### Requests
+[![tables](../diagrams/schema.png "tables")](../diagrams/schema.png "tables")
+
+## HTTP Requests
+
+Base routes for http requests
+
+
+`<http | https>://<host>/api/**`
+
+### Login
 
 ```http
-GET /api/category
+POST /user/login
 ```
 
-```http
-GET /api/category/{idcategory}
+#### Role
+
+- Not required
+
+#### Headers
+
+```json
+
+{
+  "Content-Type": "application/json"
+}
 ```
 
-```http
-GET /api/songs?idalbum={idalbum}
+#### Body
+
+```json
+
+{
+	"username":"string",
+	"password":"string"
+}
 ```
 
+#### Response
+
+```json
+{
+	"jwt": "string"
+}
+```
+
+### Sign up
+
 ```http
-GET /api/album?idcategory={idcategory}
+POST /user/register
+```
+
+#### Role
+
+- Not required
+
+#### Body
+
+```json
+{
+"username":"string",
+"password":"string",
+"nickname":"string"
+}
+```
+
+#### Response
+
+```json
+{
+  "jwt": "string"
+}
 ```
