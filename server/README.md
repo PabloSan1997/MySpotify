@@ -355,3 +355,159 @@ Multipart file
   }
 }
 ```
+
+### Delete Requests
+
+#### Delete Artists
+
+```
+DELETE /artist/{id_artist}
+```
+
+#### Delete Category
+
+```
+DELETE /category/{id_category}
+```
+
+#### Delete Album
+
+```
+DELETE /artist/{id_album}
+```
+
+#### Delete song
+
+```
+DELETE /album/song/{id_song}
+```
+
+#### Role
+
+- Admin
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Body
+
+- No content (Status code: 204)
+
+### Categories
+
+```http
+GET /category
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+[
+  {
+    "id": "number", 
+    "title": "string", 
+    "urlImage": "string"
+  }
+]
+```
+
+### Find categories lists for home
+
+This request retrieves some categories with at least 5 albums in each one.
+
+```HTTP
+GET /category/album/list
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+[
+  {
+    "id":"number",
+    "title": "string",
+    "urlImage": "string",
+    "albums": [
+      {
+        "id": "number",
+        "title": "string",
+        "urlImage": "string"
+      }
+    ]
+  }
+]
+```
+
+### Categories by different ids
+
+#### Category by id
+
+```http
+GET /category/{id_album}
+```
+
+#### Category by album id
+
+```http
+GET /category/album/{id_album}
+```
+
+#### Category by artist id
+
+```http
+GET /category/artist/{id_artist}
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+[
+  {
+    "id": "number", 
+    "title": "string", 
+    "urlImage": "string"
+  }
+]
+```
+
