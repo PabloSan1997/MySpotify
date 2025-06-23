@@ -2,7 +2,7 @@
 
 ## Databse Schema
 
-[![tables](../diagrams/schema.png "tables")](../diagrams/schema.png "tables")
+[![tables](../diagrams/schema.png "tables")](../diagrams/tables.dbml "tables")
 
 ## HTTP Requests
 
@@ -10,6 +10,11 @@ Base routes for http requests
 
 
 `<http | https>://<host>/api/**`
+
+All endpoints that return lists support pagination using the `Pageable` interface  therefore you the option to include the following queries:
+
+`?size={number}&page={number}`
+
 
 ### Login
 
@@ -469,12 +474,6 @@ GET /category/album/list
 
 ### Categories by different ids
 
-#### Category by id
-
-```http
-GET /category/{id_album}
-```
-
 #### Category by album id
 
 ```http
@@ -511,3 +510,102 @@ GET /category/artist/{id_artist}
 ]
 ```
 
+### Category by id
+
+```http
+GET /category/{id}
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+
+{
+  "id": "number", 
+  "title": "string", 
+  "urlImage": "string"
+}
+
+```
+
+### Artist by id
+
+
+```HTTP
+GET /artist/{id_artist}
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+[
+  {
+    "id": "number", 
+    "name": "string", 
+    "urlImage": "string"
+  }
+]
+```
+
+### Artist by different ids
+
+
+#### By id album
+
+```HTTP
+GET /artist/album/{id album}
+```
+
+#### By id category
+
+```HTTP
+GET /artist/category/{id_category}
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+[
+  {
+    "id": "number", 
+    "name": "string", 
+    "urlImage": "string"
+  }
+]
+```
