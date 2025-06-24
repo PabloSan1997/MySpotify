@@ -2,13 +2,15 @@
 
 ## Description
 
-This project is a basic Spotify clone for educational purposes. This app show users difierent categories, albums and songs and they can select one and hear their favorite song on the server. They also have the option to search any category or album. All information excepts files are saved on postgres and image and audio files are saved on [Firebase Storage](https://firebase.google.com/ "https://firebase.google.com")
+This project is a basic Spotify clone created for educational purposes. The app displays different categories, albums, and songs. Users can browse and listen to their favorite tracks hosted on the server. They also have the option to search for any category or album.
+All data (excluding files) is stored on postgres, while image and audio files are stored in [Firebase Storage](https://firebase.google.com/ "https://firebase.google.com").
+There are also users with `ADMIN` role, who have permissions to delete and update songs, albums and categories. They are responsible to upload images and audio files to the app. 
 
 ## Sections
 
-- Client part: [Click here](./client/ "Client part")
+- Client section: [Click here](./client/ "Client part")
 
-- Service part: [Click here](./server/ "Server part")
+- Service section: [Click here](./server/ "Server part")
 
 ## Autor
 
