@@ -327,9 +327,10 @@ POST /album/song/{id_album}
 
 Multipart file
 
-| title | type               |
-|-------|--------------------|
-| audio | .mp3, .wav, audio/mpeg, audio/wav|           |
+| title | type                              |
+|-------|-----------------------------------|
+| audio | .mp3, .wav, audio/mpeg, audio/wav |
+| title | string |
 
 #### Response
 
@@ -378,7 +379,7 @@ DELETE /category/{id_category}
 #### Delete Album
 
 ```
-DELETE /artist/{id_album}
+DELETE /album/{id_album}
 ```
 
 #### Delete song
@@ -609,3 +610,294 @@ GET /artist/category/{id_category}
   }
 ]
 ```
+
+### Album list
+
+```HTTP
+GET /album
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+[
+  {
+    "id": "number",
+    "title": "string",
+    "urlImage": "string",
+    "artists": [
+      {
+        "id": "number",
+        "name": "string",
+        "urlImage": "string"
+      }
+    ],
+    "categories": [
+      {
+        "id": "number",
+        "title": "string",
+        "urlImage": "string"
+      }
+    ]
+  }
+]
+```
+
+### Album by id
+
+```HTTP
+GET /album
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+
+{
+  "id": "number", 
+  "title": "string", 
+  "urlImage": "string", 
+  "artists": [
+    {
+      "id": "number", 
+      "name": "string", 
+      "urlImage": "string"
+    }
+  ], 
+  "categories": [
+    {
+      "id": "number", 
+      "title": "string", 
+      "urlImage": "string"
+    }
+  ]
+}
+```
+
+### Album list by ids
+
+#### By category id
+
+```HTTP
+GET /album/category/{id_category}
+```
+
+#### By artist id
+
+```HTTP
+GET /album/artist/{id_artist}
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+[
+  {
+    "id": "number",
+    "title": "string",
+    "urlImage": "string",
+    "artists": [
+      {
+        "id": "number",
+        "name": "string",
+        "urlImage": "string"
+      }
+    ],
+    "categories": [
+      {
+        "id": "number",
+        "title": "string",
+        "urlImage": "string"
+      }
+    ]
+  }
+]
+```
+
+### Song by id
+
+```http
+GET /album/song/onesong/{id_song}
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "number",
+  "title": "string",
+  "urlImage": "string",
+  "urlAudio": "string",
+  "album": {
+    "id": "number",
+    "title": "string",
+    "urlImage": "string",
+    "artists": [
+      {
+        "id": "number",
+        "name": "string",
+        "urlImage": "string"
+      }
+    ],
+    "categories": [
+      {
+        "id": "number",
+        "title": "string",
+        "urlImage": "string"
+      }
+    ]
+  }
+}
+```
+
+### Random song list
+
+This request does not have `Pageable` interface and returns 8 songs randomly.
+
+```http
+GET /album/song/random
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "number",
+  "title": "string",
+  "urlImage": "string",
+  "urlAudio": "string",
+  "album": {
+    "id": "number",
+    "title": "string",
+    "urlImage": "string",
+    "artists": [
+      {
+        "id": "number",
+        "name": "string",
+        "urlImage": "string"
+      }
+    ],
+    "categories": [
+      {
+        "id": "number",
+        "title": "string",
+        "urlImage": "string"
+      }
+    ]
+  }
+}
+```
+
+### Song list by album id
+
+This request does not have `Pageable` interface and returns 8 songs randomly.
+
+```http
+GET /album/song/{id_album}
+```
+
+#### Roles
+
+- User
+
+#### Headers
+
+```json
+{
+  "Authorization": "Bearer {jwt}"
+}
+```
+
+#### Response
+
+```json
+[
+  {
+    "id": "number",
+    "title": "string",
+    "urlImage": "string",
+    "urlAudio": "string",
+    "album": {
+      "id": "number",
+      "title": "string",
+      "urlImage": "string",
+      "artists": [
+        {
+          "id": "number",
+          "name": "string",
+         "urlImage": "string"
+        }
+      ],
+     "categories": [
+        {
+          "id": "number",
+          "title": "string",
+          "urlImage": "string"
+        }
+      ]
+    }
+  }
+]
+```
+
+
