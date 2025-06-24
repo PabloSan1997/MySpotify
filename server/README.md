@@ -1,8 +1,20 @@
 # Service
 
+## Technologies
+
+- **Language:** Java
+- **Framework:** Spring boot
+- **Important libraries:** Spring secuirty, Spring web, JWT, Firebase Admin, JPA
+- **Database:** [Cloud Storage for Firebase](https://firebase.google.com/ "Firebase console") , Postgresql
+
 ## Databse Schema
 
+### Postgresql diagram
 [![tables](../diagrams/schema.png "tables")](../diagrams/tables.dbml "tables")
+
+
+### Firebase paths in storage
+![firebase](../diagrams/schemefirebase.PNG)
 
 ## HTTP Requests
 
@@ -14,6 +26,32 @@ Base routes for http requests
 All endpoints that return lists support pagination using the `Pageable` interface  therefore you the option to include the following queries:
 
 `?size={number}&page={number}`
+
+## Index
+
+
+- [Login](#login)
+- [Sign up](#sign-up)
+- [View is admin](#view-is-admin)
+- [Update profile picture](#update-profile-picture)
+- [View user information](#view-user-information)
+- [Update Category](#update-category)
+- [Update Artist](#update-artist)
+- [Update Album](#update-album)
+- [Update Song](#update-song)
+- [Delete Requests](#delete-requests)
+- [Categories](#categories)
+- [Find categories lists for home](#find-categories-lists-for-home)
+- [Categories by different ids](#categories-by-different-ids)
+- [Category by id](#category-by-id)
+- [Artist by id](#artist-by-id)
+- [Artist by different ids](#artist-by-different-ids)
+- [Album list](#album-list)
+- [Album by id](#album-by-id)
+- [Album list by ids](#album-list-by-ids)
+- [Song by id](#song-by-id)
+- [Random song list](#random-song-list)
+- [Song list by album id](#song-list-by-album-id)
 
 
 ### Login
