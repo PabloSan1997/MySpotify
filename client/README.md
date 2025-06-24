@@ -1,5 +1,11 @@
 # Client part
 
+## Technologies
+
+- **Languages:** Javascript, SASS, Typescript, HTML
+- **Frameworks and Libreries:** React, react-router-dom, react-reduct, @reduxjs/toolkit.
+- **Build tool:** Vite
+- **Environment development:** Nodejs(v22.12.0)
 
 ## Screenshots
 

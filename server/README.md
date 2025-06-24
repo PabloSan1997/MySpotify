@@ -4,8 +4,9 @@
 
 - **Language:** Java
 - **Framework:** Spring boot
-- **Important libraries:** Spring secuirty, Spring web, JWT, Firebase Admin, JPA
-- **Database:** [Cloud Storage for Firebase](https://firebase.google.com/ "Firebase console") , Postgresql
+- **Key libraries:** Spring secuirty, Spring web, JWT, Firebase Admin, JPA
+- **Database:** [Cloud Firestore (Firebase)](https://firebase.google.com/ "Cloud Firestore (Firebase)") , Postgresql
+- **Development environment**: Openjdk-21 (provided by windows)
 
 ## Databse Schema
 
@@ -937,5 +938,3 @@ GET /album/song/{id_album}
   }
 ]
 ```
-
-
